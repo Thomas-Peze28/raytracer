@@ -5,8 +5,7 @@
 ** Sphere
 */
 
-#ifndef SPHERE_H
-    #define SPHERE_H
+#pragma once
 
     #include "Point3D.hpp"
     #include "Vector3D.hpp"
@@ -16,7 +15,8 @@ namespace Raytracer
 {
     namespace Object
     {
-        class Sphere {
+        class Sphere
+        {
             public:
                 Sphere() = default;
                 Sphere(const Math::Point3D &center, double radius);
@@ -27,10 +27,6 @@ namespace Raytracer
                 double _radius;
 
                 bool hit(const Ray &ray) const;
-
-            private:
         };
     };
-}
-
-#endif /* SPHERE_H */
+};

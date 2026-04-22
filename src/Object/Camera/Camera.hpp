@@ -5,8 +5,7 @@
 ** Camera
 */
 
-#ifndef CAMERA_H
-    #define CAMERA_H
+#pragma once
 
     #include "Point3D.hpp"
     #include "Vector3D.hpp"
@@ -17,7 +16,8 @@ namespace Raytracer
 {
     namespace Object
     {
-        class Camera {
+        class Camera
+        {
             public:
                 Camera();
                 Camera(Math::Point3D origin, Rectangle3D screen);
@@ -32,5 +32,3 @@ namespace Raytracer
         };
     }
 }
-
-#endif /* CAMERA_H */

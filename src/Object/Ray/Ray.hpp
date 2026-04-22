@@ -14,7 +14,8 @@ namespace Raytracer
 {
     namespace Object
     {
-        class Ray {
+        class Ray
+        {
             public:
                 Ray() = default;
                 Ray(const Math::Point3D &origin, const Math::Vector3D &direction);
@@ -22,8 +23,6 @@ namespace Raytracer
             
                 Math::Point3D _origin;
                 Math::Vector3D _direction;
-            
-            private:
         };
     };
 };
