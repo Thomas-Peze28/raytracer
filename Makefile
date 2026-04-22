@@ -2,12 +2,29 @@
 ## EPITECH PROJECT, 2026
 ## Makefile
 ## File description:
-## raytracer
+## Raytracer
 ##
 
+RED=\033[0;31m
+GREEN=\033[0;32m
+YELLOW=\033[0;33m
+BLUE=\033[0;34m
+MAGENTA=\033[0;35m
+CYAN=\033[0;36m
+RESET=\033[0m
+
 SRC     =   src/main.cpp \
-			src/Core/Core.cpp \
 			src/Parser/Parser.cpp \
+			src/Core/Core.cpp \
+			src/Math/Point3D/Point3D.cpp \
+			src/Math/Vector3D/Vector3D.cpp
+
+INCLUDE =   include/Raytracer.hpp \
+			src/Include/RTCError.hpp \
+			src/Parser/Parser.hpp \
+			src/Core/Core.hpp \
+			src/Math/Point3D/Point3D.hpp \
+			src/Math/Vector3D/Vector3D.hpp \
 
 CXX     =   g++
 
@@ -15,31 +32,27 @@ OBJ     =   $(SRC:.cpp=.o)
 
 NAME    =   raytracer
 
-HEADERS = 	-I src/Core \
-			-I src/Include \
-			-I src/Parser \
+CXXFLAGS = -Wextra -Wall $(addprefix -I, $(sort $(dir $(INCLUDE)))) -std=c++20
 
-CXXFLAGS = -Wextra -Wall $(HEADERS) -std=c++20
-
-RED=\033[38;5;196m
-GREEN=\033[38;5;46m
-BLUE=\033[38;5;21m
-RESET=\033[0m
+LDLIBS   = -lm
 
 .SILENT:
 
 all:    $(NAME)
 
 $(NAME):    $(OBJ)
-	$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS)
-	@printf "$(GREEN)[OK] Project '$(NAME)' built successfully.$(RESET)\n"
+	$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) $(LDLIBS)
+	@printf "$(GREEN)[OK]$(RESET) Binary $(CYAN)'$(NAME)'$(RESET) compiled successfully.\n"
 
 clean:
 	rm -f $(OBJ)
-	@printf "$(BLUE)[INFO] Object files removed.$(RESET)\n"
+	@printf "$(YELLOW)[INFO]$(RESET) Object files removed.\n"
 
 fclean: clean
 	rm -f $(NAME)
-	@printf "$(RED)[INFO] Binary '$(NAME)' removed.$(RESET)\n"
+	@printf "$(YELLOW)[INFO]$(RESET) Binary $(CYAN)'$(NAME)'$(RESET) removed.\n"
 
-re: fclean all
+re:     fclean all
+		@printf "$(BLUE)[INFO]$(RESET) Project rebuilt successfully.\n"
+
+.PHONY: all clean fclean re tests_run clean_tests
