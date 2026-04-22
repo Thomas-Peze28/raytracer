@@ -5,20 +5,21 @@
 ** Point3D
 */
 
-#ifndef POINT3D_H
-    #define POINT3D_H
+#pragma once
 
     #include <iostream>
     #include <string>
     #include <vector>
     #include <cmath>
+
 namespace Raytracer
 {
     namespace Math
     {
         class Vector3D;
 
-        class Point3D {
+        class Point3D
+        {
             public:
                 Point3D();
                 Point3D(float x, float y, float z);
@@ -39,4 +40,3 @@ namespace Raytracer
     }
 }
 
-#endif /* POINT3D_H */

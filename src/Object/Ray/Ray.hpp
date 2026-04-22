@@ -12,7 +12,8 @@
 
 namespace Raytracer
 {
-    namespace Object {
+    namespace Object
+    {
         class Ray
         {
             public:
@@ -23,5 +24,5 @@ namespace Raytracer
                 Math::Vector3D _vector;
                 Math::Point3D _point;
         };
-    }
+    };
 };
