@@ -14,15 +14,16 @@ namespace Raytracer
 {
     namespace Object
     {
-        class Ray
-        {
+        class Ray {
             public:
-                Ray();
-                Ray(Math::Point3D point, Math::Vector3D vector);
-                ~Ray();
-
-                Math::Vector3D _vector;
-                Math::Point3D _point;
+                Ray() = default;
+                Ray(const Math::Point3D &origin, const Math::Vector3D &direction);
+                ~Ray() = default;
+            
+                Math::Point3D _origin;
+                Math::Vector3D _direction;
+            
+            private:
         };
     };
 };
