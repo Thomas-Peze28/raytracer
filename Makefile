@@ -17,7 +17,11 @@ SRC     =   src/main.cpp \
 			src/Parser/Parser.cpp \
 			src/Core/Core.cpp \
 			src/Math/Point3D/Point3D.cpp \
-			src/Math/Vector3D/Vector3D.cpp
+			src/Math/Vector3D/Vector3D.cpp \
+			src/Object/Ray/Ray.cpp \
+			src/Object/Sphere/Sphere.cpp \
+			src/Object/Rectangle3D/Rectangle3D.cpp \
+			src/Object/Camera/Camera.cpp \
 
 INCLUDE =   include/Raytracer.hpp \
 			src/Include/RTCError.hpp \
@@ -25,6 +29,10 @@ INCLUDE =   include/Raytracer.hpp \
 			src/Core/Core.hpp \
 			src/Math/Point3D/Point3D.hpp \
 			src/Math/Vector3D/Vector3D.hpp \
+			src/Object/Ray/Ray.hpp \
+			src/Object/Sphere/Sphere.hpp \
+			src/Object/Rectangle3D/Rectangle3D.hpp \
+			src/Object/Camera/Camera.hpp \
 
 CXX     =   g++
 
