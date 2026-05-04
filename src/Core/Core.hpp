@@ -13,14 +13,26 @@
 
     #include "RTCError.hpp"
     #include "Parser.hpp"
+    
+    #include "Point3D.hpp"
+    #include "Vector3D.hpp"
+    #include "Ray.hpp"
+    #include "Camera.hpp"
+    #include "Scene.hpp"
+    #include "Sphere.hpp"
+    #include "Rectangle3D.hpp"
+    #include "Light.hpp"
 
 namespace Raytracer
 {
     class Core
     {
         public:
-            Core();
-            ~Core();
+            Core() = default;
+            ~Core() = default;
+
+            int run(Scene &scene);
+            void write_color(Math::Vector3D color) const;
 
             bool displayHelp(int argc, char *argv[]);
             
@@ -28,6 +40,8 @@ namespace Raytracer
 
         private:
             Parser _parser;
+
+            Raytracer::Math::Vector3D compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::Light &light) const;
     };
 };
 
