@@ -43,3 +43,18 @@ Raytracer::Math::Point3D Raytracer::Object::Rectangle3D::pointAt(double u, doubl
 {
     return _origin + _bottom_side * u + _left_side * v;
 }
+
+/**
+ * @brief Assign the values of another Rectangle3D object to this Rectangle3D object
+ * @param other The other rectangle
+ * @return A reference to this Rectangle3D object
+ */
+Raytracer::Object::Rectangle3D& Raytracer::Object::Rectangle3D::operator=(const Rectangle3D &other)
+{
+    if (this != &other) {
+        _origin = other._origin;
+        _bottom_side = other._bottom_side;
+        _left_side = other._left_side;
+    }
+    return *this;
+}

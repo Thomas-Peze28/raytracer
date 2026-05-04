@@ -22,7 +22,9 @@ namespace Raytracer
                 Rectangle3D(const Math::Point3D &origin, const Math::Vector3D &bottom_side, const Math::Vector3D &left_side);
                 Rectangle3D(const Rectangle3D &other);
                 ~Rectangle3D() = default;
-        
+
+                Rectangle3D& operator=(const Rectangle3D &other);
+
                 Math::Point3D pointAt(double u, double v) const;
 
                 Math::Point3D _origin;
