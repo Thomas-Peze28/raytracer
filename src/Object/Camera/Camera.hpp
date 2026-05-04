@@ -20,15 +20,22 @@ namespace Raytracer
         {
             public:
                 Camera();
-                Camera(Math::Point3D origin, Rectangle3D screen);
+                Camera(unsigned int width, unsigned int height);
                 Camera(const Camera &other);
                 ~Camera() = default;
 
+                Camera& operator=(const Camera &other);
+
                 Ray ray(double u, double v) const;
 
+                unsigned int width() const;
+                unsigned int height() const;
+
             private:
-                Math::Point3D _origin;
+                Raytracer::Math::Point3D _origin;
                 Rectangle3D _screen;
+                unsigned int _width;
+                unsigned int _height;
         };
     }
 }
