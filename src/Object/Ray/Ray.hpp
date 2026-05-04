@@ -20,6 +20,7 @@ namespace Raytracer
                 Ray() = default;
                 Ray(const Math::Point3D &origin, const Math::Vector3D &direction);
                 ~Ray() = default;
+                Ray& operator=(const Ray &other);
             
                 Math::Point3D _origin;
                 Math::Vector3D _direction;
