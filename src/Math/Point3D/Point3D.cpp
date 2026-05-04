@@ -67,6 +67,21 @@ Raytracer::Math::Point3D Raytracer::Math::Point3D::operator-(const Vector3D &vec
 }
 
 /**
+* @brief Assign the values of another Point3D object to this Point3D object
+* @param other The other Point3D object
+* @return A reference to this Point3D object after assignment
+**/
+Raytracer::Math::Point3D& Raytracer::Math::Point3D::operator=(const Point3D &other)
+{
+	if (this != &other) {
+		_x = other._x;
+		_y = other._y;
+		_z = other._z;
+	}
+	return *this;
+}
+
+/**
 * @brief Calculate the distance between this point and another point
 * @param other The other point
 * @return The distance between the two points

@@ -30,6 +30,7 @@ namespace Raytracer
                 float _y;
                 float _z;
 
+                Point3D& operator=(const Point3D &other);
                 Vector3D operator-(const Point3D& other) const;
                 Point3D operator+(const Vector3D& vec) const;
                 Point3D operator-(const Vector3D& vec) const;
