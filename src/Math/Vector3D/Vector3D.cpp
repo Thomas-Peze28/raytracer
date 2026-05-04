@@ -36,6 +36,21 @@ Raytracer::Math::Vector3D::Vector3D(const Vector3D &other) : _x(other._x), _y(ot
 }
 
 /**
+* @brief Assign the values of another Vector3D object to this Vector3D object
+* @param other The other vector 3D
+* @return A reference to this Vector3D object
+**/
+Raytracer::Math::Vector3D& Raytracer::Math::Vector3D::operator=(const Vector3D &other)
+{
+    if (this != &other) {
+        _x = other._x;
+        _y = other._y;
+        _z = other._z;
+    }
+    return *this;
+}
+
+/**
 * @brief Calculate the length of the vector 3D
 * @return The length of the vector 3D
 **/
