@@ -86,7 +86,11 @@ int Raytracer::Core::run(Raytracer::Scene &scene)
             }
 
             if (has_hit && !scene.lights.empty()) {
-                pixel_color = compute_lambert_lighting(closest_hit, scene.lights[0]);
+                for (const auto &light : scene.lights) {
+                    pixel_color += compute_lambert_lighting(closest_hit, light);
+                }
+            } else {
+                pixel_color = Math::Vector3D(0, 0, 0);
             }
             write_color(pixel_color);
         }
