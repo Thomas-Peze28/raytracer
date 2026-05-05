@@ -28,6 +28,19 @@ void Raytracer::Core::write_color(Raytracer::Math::Vector3D color) const
     int g = color._y;
     int b = color._z;
 
+    if (r < 0)
+        r = 0;
+    if (g < 0)
+        g = 0;
+    if (b < 0)
+        b = 0;
+    if (r > 255)
+        r = 255;
+    if (g > 255)
+        g = 255;
+    if (b > 255)
+        b = 255;
+
     std::cout << r << " " << g << " " << b << std::endl;
 }
 
@@ -37,11 +50,13 @@ Raytracer::Math::Vector3D Raytracer::Core::compute_lambert_lighting(const Raytra
     light_dir = light_dir / light_dir.length();
 
     Raytracer::Math::Vector3D normal = hit.normal / hit.normal.length();
+    Raytracer::Math::Vector3D light_color = light.color() / 255.0;
 
     float dot_product = normal.dot(light_dir);
     float lambert_factor = std::max(0.0f, dot_product);
+    float ambient_factor = 0.15f;
 
-    return hit.color * (lambert_factor * light.intensity());
+    return (hit.color * ambient_factor) + (hit.color * light_color * (lambert_factor * light.intensity()));
 }
 
 int Raytracer::Core::run(Raytracer::Scene &scene)

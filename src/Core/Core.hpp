@@ -22,6 +22,7 @@
     #include "Sphere.hpp"
     #include "Rectangle3D.hpp"
     #include "Light.hpp"
+    #include "Plane.hpp"
 
 namespace Raytracer
 {
