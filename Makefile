@@ -24,6 +24,7 @@ SRC     =   src/main.cpp \
 			src/Object/Rectangle3D/Rectangle3D.cpp \
 			src/Object/Camera/Camera.cpp \
 			src/Object/Light/Light.cpp \
+			src/Object/Plane/Plane.cpp \
 			
 
 INCLUDE =   include/Raytracer.hpp \
@@ -39,6 +40,7 @@ INCLUDE =   include/Raytracer.hpp \
 			src/Object/Rectangle3D/Rectangle3D.hpp \
 			src/Object/Camera/Camera.hpp \
 			src/Object/Light/Light.hpp	\
+			src/Object/Plane/Plane.hpp
 
 CXX     =   g++
 
