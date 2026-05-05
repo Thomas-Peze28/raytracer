@@ -20,8 +20,7 @@ int main(int argc, char *argv[])
     scene.objects.push_back(std::make_unique<Raytracer::Object::Sphere>(Raytracer::Math::Point3D(0, 0, -6), 1.0, Raytracer::Math::Vector3D(0, 255, 0))); // Sphere verte
     scene.objects.push_back(std::make_unique<Raytracer::Object::Sphere>(Raytracer::Math::Point3D(-2, 1, -5), 1.0, Raytracer::Math::Vector3D(0, 0, 255))); // Sphere bleue
     scene.objects.push_back(std::make_unique<Raytracer::Object::Sphere>(Raytracer::Math::Point3D(2, 0, -5), 1.0, Raytracer::Math::Vector3D(255, 255, 0))); // Sphere jaune
-    scene.objects.push_back(std::make_unique<Raytracer::Object::Plane>('x', -0.2, Raytracer::Math::Vector3D(255, 255, 255))); // Plane blanc sol
-    //scene.objects.push_back(std::make_unique<Raytracer::Object::Plane>('z', -50.0, Raytracer::Math::Vector3D(255, 255, 255))); // Plane blanc mur fond
+    scene.objects.push_back(std::make_unique<Raytracer::Object::Plane>('x', -1.5, Raytracer::Math::Vector3D(255, 255, 255))); // Plane blanc sol
 
     return core.run(scene);
 
