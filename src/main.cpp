@@ -22,6 +22,9 @@ int main(int argc, char *argv[])
     scene.objects.push_back(std::make_unique<Raytracer::Object::Sphere>(Raytracer::Math::Point3D(2, 0, -5), 1.0, Raytracer::Math::Vector3D(255, 255, 0))); // Sphere jaune
     scene.objects.push_back(std::make_unique<Raytracer::Object::Plane>('x', -1.5, Raytracer::Math::Vector3D(255, 255, 255))); // Plane blanc sol
 
+    core._ambient_factor = 0.1f;
+    core._diffuse_factor = 1.0f;
+
     return core.run(scene);
 
     /*

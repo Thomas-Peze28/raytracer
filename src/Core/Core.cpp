@@ -54,9 +54,10 @@ Raytracer::Math::Vector3D Raytracer::Core::compute_lambert_lighting(const Raytra
 
     float dot_product = normal.dot(light_dir);
     float lambert_factor = std::max(0.0f, dot_product);
-    float ambient_factor = 0.15f;
+    float ambient_factor = _ambient_factor;
+    float diffuse_factor = _diffuse_factor;
 
-    return (hit.color * ambient_factor) + (hit.color * light_color * (lambert_factor * light.intensity()));
+    return (hit.color * ambient_factor) + (hit.color * light_color * (lambert_factor * light.intensity() * diffuse_factor));
 }
 
 int Raytracer::Core::run(Raytracer::Scene &scene)

@@ -39,6 +39,9 @@ namespace Raytracer
             
             void parseSceneFile(const std::string &scene_file) { return _parser.parseSceneFile(scene_file); };
 
+            float _ambient_factor = 0.15f;
+            float _diffuse_factor = 1.0f;
+
         private:
             Parser _parser;
 
