@@ -7,6 +7,12 @@
 
 #include "Core.hpp"
 
+/**
+* Displays help information for the raytracer.
+* @param argc The number of command-line arguments.
+* @param argv The array of command-line arguments.
+* @return True if help was displayed, false otherwise.
+**/
 bool Raytracer::Core::displayHelp(int argc, char *argv[])
 {
     if (argc != 2) {
@@ -44,6 +50,12 @@ void Raytracer::Core::write_color(Raytracer::Math::Vector3D color) const
     std::cout << r << " " << g << " " << b << std::endl;
 }
 
+/**
+* Computes the Lambert lighting for a hit point and a light source.
+* @param hit The hit result.
+* @param light The light source.
+* @return The computed lighting color.
+**/
 Raytracer::Math::Vector3D Raytracer::Core::compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::Light &light) const
 {
     Raytracer::Math::Vector3D light_dir = light.position() - hit.point;
@@ -59,6 +71,32 @@ Raytracer::Math::Vector3D Raytracer::Core::compute_lambert_lighting(const Raytra
     return (hit.color * light_color * (lambert_factor * light.intensity() * diffuse_factor));
 }
 
+/**
+* Calculates the color of a ray after it intersects with objects in the scene.
+* @param ray The ray to trace.
+* @param scene The scene containing objects and lights.
+* @return The calculated color for the ray.
+**/
+Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ray &ray, const Raytracer::Scene &scene) const
+{
+    Raytracer::HitResult closest_hit;
+    
+    if (!scene.hit(ray, 0.001f, 100000.0f, closest_hit)) {
+        return Math::Vector3D(0, 0, 0);
+    }
+
+    Math::Vector3D pixel_color = closest_hit.color * _ambient_factor;
+
+    for (const auto &light : scene.lights) {
+        Math::Vector3D light_dir = light.position() - closest_hit.point;
+        float distance_to_light = light_dir.length();
+        light_dir = light_dir / distance_to_light;
+
+        pixel_color += compute_lambert_lighting(closest_hit, light);
+    }
+    return pixel_color;
+}
+
 int Raytracer::Core::run(Raytracer::Scene &scene)
 {
     std::cout << "P3\n" << scene.camera.width() << " " << scene.camera.height() << "\n255\n";
@@ -70,28 +108,7 @@ int Raytracer::Core::run(Raytracer::Scene &scene)
             
             Raytracer::Object::Ray r = scene.camera.ray(u, v);
     
-            bool has_hit = false;
-            double closest_t = 0.0;
-            Raytracer::HitResult closest_hit;
-            Math::Vector3D pixel_color(0, 0, 0); 
-        
-            for (const auto &object : scene.objects) {
-                Raytracer::HitResult hit_result = object->hit(r);
-                if (hit_result.is_hit && (!has_hit || hit_result.t < closest_t)) {
-                    has_hit = true;
-                    closest_t = hit_result.t;
-                    closest_hit = hit_result;
-                }
-            }
-
-            if (has_hit && !scene.lights.empty()) {
-                pixel_color = closest_hit.color * _ambient_factor;
-                for (const auto &light : scene.lights) {
-                    pixel_color += compute_lambert_lighting(closest_hit, light);
-                }
-            } else {
-                pixel_color = Math::Vector3D(0, 0, 0);
-            }
+            Math::Vector3D pixel_color = ray_color(r, scene); 
             write_color(pixel_color);
         }
     }

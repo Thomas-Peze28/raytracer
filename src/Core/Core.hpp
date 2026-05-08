@@ -39,6 +39,8 @@ namespace Raytracer
             
             void parseSceneFile(const std::string &scene_file) { return _parser.parseSceneFile(scene_file); };
 
+            Raytracer::Math::Vector3D ray_color(const Raytracer::Object::Ray &ray, const Raytracer::Scene &scene) const;
+
             float _ambient_factor = 0.15f;
             float _diffuse_factor = 1.0f;
 
