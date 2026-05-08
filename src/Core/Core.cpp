@@ -81,7 +81,7 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
 {
     Raytracer::HitResult closest_hit;
     
-    if (!scene.hit(ray, 0.001f, 100000.0f, closest_hit)) {
+    if (!scene.hit(ray, 0.00001f, 100000.0f, closest_hit)) {
         return Math::Vector3D(0, 0, 0);
     }
 
@@ -92,7 +92,15 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
         float distance_to_light = light_dir.length();
         light_dir = light_dir / distance_to_light;
 
-        pixel_color += compute_lambert_lighting(closest_hit, light);
+        if (light_dir.dot(closest_hit.normal) <= 0)
+            continue;
+
+        Raytracer::Object::Ray shadow_ray(closest_hit.point + closest_hit.normal * 0.00001f, light_dir);
+        Raytracer::HitResult shadow_hit;
+
+        if (!scene.hit(shadow_ray, 0.00001f, distance_to_light, shadow_hit)) {
+            pixel_color += compute_lambert_lighting(closest_hit, light);
+        }
     }
     return pixel_color;
 }

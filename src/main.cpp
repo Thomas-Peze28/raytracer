@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
     Raytracer::Scene scene;
 
     scene.camera = Raytracer::Object::Camera(1200, 800);
-    scene.lights.push_back(Raytracer::Object::Light(Raytracer::Math::Point3D(-100, -80, 10), Raytracer::Math::Vector3D(255, 255, 255), 0.7f)); // Lumière
-    scene.lights.push_back(Raytracer::Object::Light(Raytracer::Math::Point3D(100, 10, 5), Raytracer::Math::Vector3D(255, 255, 255), 0.4f)); // Lumière
+    scene.lights.push_back(Raytracer::Object::Light(Raytracer::Math::Point3D(-100, -80, 10), Raytracer::Math::Vector3D(255, 255, 255), 1.0f)); // Lumière
+    scene.lights.push_back(Raytracer::Object::Light(Raytracer::Math::Point3D(100, -30, 5), Raytracer::Math::Vector3D(255, 255, 255), 1.0f)); // Lumière
 
     scene.objects.push_back(std::make_unique<Raytracer::Object::Plane>('x', -1.5, Raytracer::Math::Vector3D(255, 255, 255))); // Plane blanc sol
     scene.objects.push_back(std::make_unique<Raytracer::Object::Sphere>(Raytracer::Math::Point3D(1, -1, -5), 1.2, Raytracer::Math::Vector3D(255, 0, 0))); // Sphere rouge
