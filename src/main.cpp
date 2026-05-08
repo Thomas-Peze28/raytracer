@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     Raytracer::Scene scene;
 
-    scene.camera = Raytracer::Object::Camera(720, 480);
+    scene.camera = Raytracer::Object::Camera(1200, 800);
     scene.lights.push_back(Raytracer::Object::Light(Raytracer::Math::Point3D(-100, -80, 10), Raytracer::Math::Vector3D(255, 255, 255), 0.7f)); // Lumière
     scene.lights.push_back(Raytracer::Object::Light(Raytracer::Math::Point3D(100, 10, 5), Raytracer::Math::Vector3D(255, 255, 255), 0.4f)); // Lumière
 
