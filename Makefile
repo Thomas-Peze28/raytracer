@@ -15,12 +15,14 @@ RESET=\033[0m
 
 PRIMITIVES_SRC	= 	src/Object/Primitive/Sphere/Sphere.cpp \
 					src/Object/Primitive/Rectangle3D/Rectangle3D.cpp \
-					src/Object/Primitive/Plane/Plane.cpp
+					src/Object/Primitive/Plane/Plane.cpp \
+					src/Object/Primitive/Cylinder/Cylinder.cpp \
 
 PRIMITIVES_INCLUDE =	src/Object/Primitive/IPrimitive/IPrimitive.hpp \
 						src/Object/Primitive/Sphere/Sphere.hpp \
 						src/Object/Primitive/Rectangle3D/Rectangle3D.hpp \
-						src/Object/Primitive/Plane/Plane.hpp
+						src/Object/Primitive/Plane/Plane.hpp \
+						src/Object/Primitive/Cylinder/Cylinder.hpp \
 
 LIGHTS_SRC		=	src/Object/Light/PointLight/PointLight.cpp \
 					src/Object/Light/DirectionalLight/DirectionalLight.cpp
