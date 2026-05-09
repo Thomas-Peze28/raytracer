@@ -56,19 +56,16 @@ void Raytracer::Core::write_color(Raytracer::Math::Vector3D color) const
 * @param light The light source.
 * @return The computed lighting color.
 **/
-Raytracer::Math::Vector3D Raytracer::Core::compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::Light &light) const
+Raytracer::Math::Vector3D Raytracer::Core::compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::ILight &light) const
 {
-    Raytracer::Math::Vector3D light_dir = light.position() - hit.point;
-    light_dir = light_dir / light_dir.length();
-
-    Raytracer::Math::Vector3D normal = hit.normal / hit.normal.length();
-    Raytracer::Math::Vector3D light_color = light.color() / 255.0;
+    Math::Vector3D light_dir = light.getDirectionToLight(hit.point);
+    Math::Vector3D normal = hit.normal / hit.normal.length();
+    Math::Vector3D light_color = light.color() / 255.0;
 
     float dot_product = normal.dot(light_dir);
     float lambert_factor = std::max(0.0f, dot_product);
-    float diffuse_factor = _diffuse_factor;
 
-    return (hit.color * light_color * (lambert_factor * light.intensity() * diffuse_factor));
+    return (hit.color * light_color * (lambert_factor * light.intensity() * _diffuse_factor));
 }
 
 /**
@@ -88,7 +85,7 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
     Math::Vector3D pixel_color = closest_hit.color * _ambient_factor;
 
     for (const auto &light : scene.lights) {
-        Math::Vector3D light_dir = light.position() - closest_hit.point;
+        Math::Vector3D light_dir = light->position() - closest_hit.point;
         float distance_to_light = light_dir.length();
         light_dir = light_dir / distance_to_light;
 
@@ -99,7 +96,7 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
         Raytracer::HitResult shadow_hit;
 
         if (!scene.hit(shadow_ray, 0.00001f, distance_to_light, shadow_hit)) {
-            pixel_color += compute_lambert_lighting(closest_hit, light);
+            pixel_color += compute_lambert_lighting(closest_hit, *light);
         }
     }
     return pixel_color;

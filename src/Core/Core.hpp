@@ -21,7 +21,9 @@
     #include "Scene.hpp"
     #include "Sphere.hpp"
     #include "Rectangle3D.hpp"
-    #include "Light.hpp"
+    #include "IPrimitive.hpp"
+    #include "ILight.hpp"
+    #include "PointLight.hpp"
     #include "Plane.hpp"
 
 namespace Raytracer
@@ -47,7 +49,7 @@ namespace Raytracer
         private:
             Parser _parser;
 
-            Raytracer::Math::Vector3D compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::Light &light) const;
+            Raytracer::Math::Vector3D compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::ILight &light) const;
     };
 };
 
