@@ -85,9 +85,8 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
     Math::Vector3D pixel_color = closest_hit.color * _ambient_factor;
 
     for (const auto &light : scene.lights) {
-        Math::Vector3D light_dir = light->position() - closest_hit.point;
-        float distance_to_light = light_dir.length();
-        light_dir = light_dir / distance_to_light;
+        Math::Vector3D light_dir = light->getDirectionToLight(closest_hit.point);
+        float distance_to_light = light->getDistanceToLight(closest_hit.point);
 
         if (light_dir.dot(closest_hit.normal) <= 0)
             continue;

@@ -24,6 +24,7 @@
     #include "IPrimitive.hpp"
     #include "ILight.hpp"
     #include "PointLight.hpp"
+    #include "DirectionalLight.hpp"
     #include "Plane.hpp"
 
 namespace Raytracer
