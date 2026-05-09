@@ -22,7 +22,6 @@ namespace Raytracer
                 virtual Math::Vector3D getDirectionToLight(const Math::Point3D &hit_point) const = 0;
                 virtual float getDistanceToLight(const Math::Point3D &hit_point) const = 0;
 
-                virtual const Math::Point3D &position() const = 0;
                 virtual const Math::Vector3D &color() const = 0;
                 virtual float intensity() const = 0;
         };

@@ -23,7 +23,7 @@ namespace Raytracer
                 PointLight(const Math::Point3D &position, const Math::Vector3D &color, const float intensity);
                 ~PointLight() = default;
         
-                const Math::Point3D &position() const override;
+                const Math::Point3D &position() const;
                 const Math::Vector3D &color() const override;
                 float intensity() const override;
 
