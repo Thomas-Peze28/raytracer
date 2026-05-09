@@ -32,6 +32,12 @@ int main(int argc, char *argv[])
         2.0f,
         Raytracer::Math::Vector3D(0, 0, 255)
     ));
+    scene.objects.push_back(std::make_unique<Raytracer::Object::Cylinder>(
+        Raytracer::Math::Point3D(10.0f, 0.0f, -15.0f),
+        2.0f,
+        0.0f,
+        Raytracer::Math::Vector3D(0, 255, 0)
+    ));
 
 
     core._ambient_factor = 0.1f;

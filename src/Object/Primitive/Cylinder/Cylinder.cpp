@@ -87,6 +87,11 @@ Raytracer::HitResult Raytracer::Object::Cylinder::hit(const Ray &ray) const
     float y_max = _center._y + _height;
     float t_final = -1.0;
 
+    if (_height <= 0.0) {
+        y_min = -std::numeric_limits<float>::infinity();
+        y_max = std::numeric_limits<float>::infinity();
+    }
+
     float y_hit1 = ray._origin._y + t1 * ray._direction._y;
     if (t1 > 0.001f && y_hit1 >= y_min && y_hit1 <= y_max) {
         t_final = t1;
