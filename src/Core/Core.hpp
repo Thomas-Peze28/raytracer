@@ -27,6 +27,7 @@
     #include "DirectionalLight.hpp"
     #include "Plane.hpp"
     #include "Cylinder.hpp"
+    #include "Cone.hpp"
 
 namespace Raytracer
 {
