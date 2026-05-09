@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     scene.objects.push_back(std::make_unique<Raytracer::Object::Sphere>(Raytracer::Math::Point3D(-2, 1, -5), 1.0, Raytracer::Math::Vector3D(0, 0, 255))); // Sphere bleue
     scene.objects.push_back(std::make_unique<Raytracer::Object::Sphere>(Raytracer::Math::Point3D(2, 0, -4.5), 1.0, Raytracer::Math::Vector3D(255, 255, 0))); // Sphere jaune
     scene.objects.push_back(std::make_unique<Raytracer::Object::Cylinder>(
-        Raytracer::Math::Point3D(-7.0f, 0.0f, -10.0f),
+        Raytracer::Math::Point3D(-7.0f, -4.0f, -10.0f),
         1.0f,
         2.0f,
         Raytracer::Math::Vector3D(0, 0, 255)

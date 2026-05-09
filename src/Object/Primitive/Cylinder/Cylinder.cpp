@@ -83,12 +83,27 @@ Raytracer::HitResult Raytracer::Object::Cylinder::hit(const Ray &ray) const
     if (t1 > t2)
         std::swap(t1, t2);
 
-    if (t1 < 0.0)
+    float y_min = _center._y;
+    float y_max = _center._y + _height;
+    float t_final = -1.0;
+
+    float y_hit1 = ray._origin._y + t1 * ray._direction._y;
+    if (t1 > 0.001f && y_hit1 >= y_min && y_hit1 <= y_max) {
+        t_final = t1;
+    } 
+    else {
+        float y_hit2 = ray._origin._y + t2 * ray._direction._y;
+        if (t2 > 0.001f && y_hit2 >= y_min && y_hit2 <= y_max) {
+            t_final = t2;
+        }
+    }
+
+    if (t_final < 0.001f)
         return result;
 
     result.is_hit = true;
-    result.t = t1;
-    result.point = ray._origin + ray._direction * t1;
+    result.t = t_final;
+    result.point = ray._origin + ray._direction * t_final;
     result.normal = Math::Vector3D(result.point._x - _center._x, 0.0, result.point._z - _center._z) / _radius;
     result.color = _color;
     return result;
