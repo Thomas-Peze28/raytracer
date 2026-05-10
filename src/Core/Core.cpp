@@ -101,6 +101,11 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
     return pixel_color;
 }
 
+/**
+* Runs the raytracer with the given scene.
+* @param scene The scene to render.
+* @return The result of the rendering process.
+**/
 int Raytracer::Core::run(Raytracer::Scene &scene)
 {
     std::cout << "P3\n" << scene.camera.width() << " " << scene.camera.height() << "\n255\n";
