@@ -13,14 +13,18 @@
 
     #include "RTCError.hpp"
 
+    #include "Scene.hpp"
+    #include "PrimitiveFactory.hpp"
+    #include "LightFactory.hpp"
+
 namespace Raytracer
 {
     class Parser
     {
         public:
-            Parser();
-            ~Parser();
+            Parser() = default;
+            ~Parser() = default;
 
-            void parseSceneFile(const std::string &scene_file);
+            void loadScene(const std::string &filepath, Scene &scene);
     };
 };

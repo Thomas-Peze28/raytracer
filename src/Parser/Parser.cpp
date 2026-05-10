@@ -7,18 +7,11 @@
 
 #include "Parser.hpp"
 
-Raytracer::Parser::Parser()
+/**
+* @brief Load a scene from a configuration file and populate the provided Scene object.
+* @param filepath The path to the configuration file containing the scene description.
+* @param scene The Scene object to populate with the loaded scene data.
+**/
+void Raytracer::Parser::loadScene(const std::string &filepath, Scene &scene)
 {
-}
-
-Raytracer::Parser::~Parser()
-{
-}
-
-void Raytracer::Parser::parseSceneFile(const std::string &scene_file)
-{
-    if (!std::filesystem::exists(scene_file))
-        throw ErrorCritical("Scene file error: The file '" + scene_file + "' does not exist.");
-    if (!std::filesystem::is_regular_file(scene_file))
-        throw ErrorCritical("Scene file error: '" + scene_file + "' is not a valid regular file.");
-}
+}  
