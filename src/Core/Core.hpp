@@ -12,7 +12,6 @@
     #include <iostream>
 
     #include "RTCError.hpp"
-    #include "Parser.hpp"
     
     #include "Point3D.hpp"
     #include "Vector3D.hpp"
@@ -23,6 +22,7 @@
     #include "PrimitiveFactory.hpp"
     #include "ILight.hpp"
     #include "LightFactory.hpp"
+    #include "Parser.hpp"
 
 namespace Raytracer
 {
@@ -31,13 +31,13 @@ namespace Raytracer
         public:
             Core() = default;
             ~Core() = default;
-
+        
             int run(Scene &scene);
             void write_color(Math::Vector3D color) const;
 
             bool displayHelp(int argc, char *argv[]);
             
-            void parseSceneFile(const std::string &scene_file) { return _parser.parseSceneFile(scene_file); };
+            void loadScene(const std::string &scene_file, Scene &scene) { _parser.loadScene(scene_file, scene); };
 
             Raytracer::Math::Vector3D ray_color(const Raytracer::Object::Ray &ray, const Raytracer::Scene &scene) const;
 

@@ -5,6 +5,8 @@
 ** Scene
 */
 
+#pragma once
+
 #include <vector>
 #include <memory>
 #include "IPrimitive.hpp"
