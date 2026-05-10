@@ -18,6 +18,7 @@ PRIMITIVES_SRC	= 	src/Object/Primitive/Sphere/Sphere.cpp \
 					src/Object/Primitive/Plane/Plane.cpp \
 					src/Object/Primitive/Cylinder/Cylinder.cpp \
 					src/Object/Primitive/Cone/Cone.cpp \
+					src/Factory/PrimitiveFactory/PrimitiveFactory.cpp \
 
 PRIMITIVES_INCLUDE =	src/Object/Primitive/IPrimitive/IPrimitive.hpp \
 						src/Object/Primitive/Sphere/Sphere.hpp \
@@ -25,6 +26,7 @@ PRIMITIVES_INCLUDE =	src/Object/Primitive/IPrimitive/IPrimitive.hpp \
 						src/Object/Primitive/Plane/Plane.hpp \
 						src/Object/Primitive/Cylinder/Cylinder.hpp \
 						src/Object/Primitive/Cone/Cone.hpp \
+						src/Factory/PrimitiveFactory/PrimitiveFactory.hpp \
 
 LIGHTS_SRC		=	src/Object/Light/PointLight/PointLight.cpp \
 					src/Object/Light/DirectionalLight/DirectionalLight.cpp

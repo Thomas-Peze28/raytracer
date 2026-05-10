@@ -19,15 +19,11 @@
     #include "Ray.hpp"
     #include "Camera.hpp"
     #include "Scene.hpp"
-    #include "Sphere.hpp"
-    #include "Rectangle3D.hpp"
     #include "IPrimitive.hpp"
+    #include "PrimitiveFactory.hpp"
     #include "ILight.hpp"
     #include "PointLight.hpp"
     #include "DirectionalLight.hpp"
-    #include "Plane.hpp"
-    #include "Cylinder.hpp"
-    #include "Cone.hpp"
 
 namespace Raytracer
 {
