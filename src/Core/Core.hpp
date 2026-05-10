@@ -19,9 +19,10 @@
     #include "Ray.hpp"
     #include "Camera.hpp"
     #include "Scene.hpp"
-    #include "Sphere.hpp"
-    #include "Rectangle3D.hpp"
-    #include "Light.hpp"
+    #include "IPrimitive.hpp"
+    #include "PrimitiveFactory.hpp"
+    #include "ILight.hpp"
+    #include "LightFactory.hpp"
 
 namespace Raytracer
 {
@@ -38,10 +39,15 @@ namespace Raytracer
             
             void parseSceneFile(const std::string &scene_file) { return _parser.parseSceneFile(scene_file); };
 
+            Raytracer::Math::Vector3D ray_color(const Raytracer::Object::Ray &ray, const Raytracer::Scene &scene) const;
+
+            float _ambient_factor = 0.15f;
+            float _diffuse_factor = 1.0f;
+
         private:
             Parser _parser;
 
-            Raytracer::Math::Vector3D compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::Light &light) const;
+            Raytracer::Math::Vector3D compute_lambert_lighting(const Raytracer::HitResult &hit, const Raytracer::Object::ILight &light) const;
     };
 };
 

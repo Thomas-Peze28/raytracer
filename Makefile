@@ -13,6 +13,30 @@ MAGENTA=\033[0;35m
 CYAN=\033[0;36m
 RESET=\033[0m
 
+PRIMITIVES_SRC	= 	src/Object/Primitive/Sphere/Sphere.cpp \
+					src/Object/Primitive/Rectangle3D/Rectangle3D.cpp \
+					src/Object/Primitive/Plane/Plane.cpp \
+					src/Object/Primitive/Cylinder/Cylinder.cpp \
+					src/Object/Primitive/Cone/Cone.cpp \
+					src/Factory/PrimitiveFactory/PrimitiveFactory.cpp \
+
+PRIMITIVES_INCLUDE =	src/Object/Primitive/IPrimitive/IPrimitive.hpp \
+						src/Object/Primitive/Sphere/Sphere.hpp \
+						src/Object/Primitive/Rectangle3D/Rectangle3D.hpp \
+						src/Object/Primitive/Plane/Plane.hpp \
+						src/Object/Primitive/Cylinder/Cylinder.hpp \
+						src/Object/Primitive/Cone/Cone.hpp \
+						src/Factory/PrimitiveFactory/PrimitiveFactory.hpp \
+
+LIGHTS_SRC		=	src/Object/Light/PointLight/PointLight.cpp \
+					src/Object/Light/DirectionalLight/DirectionalLight.cpp \
+					src/Factory/LightFactory/LightFactory.cpp \
+
+LIGHTS_INCLUDE	=	src/Object/Light/ILight/ILight.hpp \
+					src/Object/Light/PointLight/PointLight.hpp \
+					src/Object/Light/DirectionalLight/DirectionalLight.hpp \
+					src/Factory/LightFactory/LightFactory.hpp \
+
 SRC     =   src/main.cpp \
 			src/Parser/Parser.cpp \
 			src/Core/Core.cpp \
@@ -20,10 +44,9 @@ SRC     =   src/main.cpp \
 			src/Math/Vector3D/Vector3D.cpp \
 			src/Object/Ray/Ray.cpp \
 			src/Scene/Scene.cpp \
-			src/Object/Sphere/Sphere.cpp \
-			src/Object/Rectangle3D/Rectangle3D.cpp \
 			src/Object/Camera/Camera.cpp \
-			src/Object/Light/Light.cpp \
+			$(PRIMITIVES_SRC) \
+			$(LIGHTS_SRC)
 			
 
 INCLUDE =   include/Raytracer.hpp \
@@ -34,11 +57,9 @@ INCLUDE =   include/Raytracer.hpp \
 			src/Math/Point3D/Point3D.hpp \
 			src/Math/Vector3D/Vector3D.hpp \
 			src/Object/Ray/Ray.hpp \
-			src/Object/IPrimitive/IPrimitive.hpp \
-			src/Object/Sphere/Sphere.hpp \
-			src/Object/Rectangle3D/Rectangle3D.hpp \
 			src/Object/Camera/Camera.hpp \
-			src/Object/Light/Light.hpp	\
+			$(PRIMITIVES_INCLUDE) \
+			$(LIGHTS_INCLUDE)
 
 CXX     =   g++
 

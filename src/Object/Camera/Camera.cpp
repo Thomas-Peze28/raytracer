@@ -15,6 +15,7 @@ Raytracer::Object::Camera::Camera()
             Math::Vector3D(2.0f, 0.0f, 0.0f),
             Math::Vector3D(0.0f, 2.0f, 0.0f)
         );
+    _fov = 90;
 }
 
 /** 
@@ -26,11 +27,34 @@ Raytracer::Object::Camera::Camera()
 Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height) {
     _width = width;
     _height = height;
+    _fov = 90;
+
+    double theta = _fov * (M_PI / 180.0);
+    double h = tan(theta / 2.0);
 
     double aspect_ratio = double(_width) / double(_height);
-    double base_width = 2.0f;
-    double base_height = base_width / aspect_ratio;  
+    double base_width = 2.0f * h * aspect_ratio;
+    double base_height = 2.0f * h; 
 
+    _origin = Math::Point3D(0.0f, 0.0f, 0.0f);
+    _screen = Rectangle3D(
+        Math::Point3D(-base_width / 2.0f, -base_height / 2.0f, -1.0f),
+        Math::Vector3D(base_width, 0.0f, 0.0f),
+        Math::Vector3D(0.0f, base_height, 0.0f)
+    );
+}
+
+Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height, unsigned int fov) {
+    _width = width;
+    _height = height;
+    _fov = fov;
+
+    double theta = _fov * (M_PI / 180.0);
+    double h = tan(theta / 2.0);
+
+    double aspect_ratio = double(_width) / double(_height);
+    double base_width = 2.0f * h * aspect_ratio;
+    double base_height = 2.0f * h;
 
     _origin = Math::Point3D(0.0f, 0.0f, 0.0f);
     _screen = Rectangle3D(
@@ -47,7 +71,10 @@ Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height) {
 */
 Raytracer::Object::Camera::Camera(const Camera &other) :
     _origin(other._origin),
-    _screen(other._screen)
+    _screen(other._screen),
+    _width(other._width),
+    _height(other._height),
+    _fov(other._fov)
 {
 }
 
@@ -74,6 +101,7 @@ Raytracer::Object::Camera& Raytracer::Object::Camera::operator=(const Camera &ot
         _screen = other._screen;
         _width = other._width;
         _height = other._height;
+        _fov = other._fov;
     }
     return *this;
 }
@@ -94,4 +122,13 @@ unsigned int Raytracer::Object::Camera::width() const
 unsigned int Raytracer::Object::Camera::height() const
 {
     return _height;
+}
+
+/**
+* @brief Get the field of view of the camera
+* @return The field of view of the camera
+**/
+unsigned int Raytracer::Object::Camera::fov() const
+{
+    return _fov;
 }

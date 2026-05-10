@@ -21,6 +21,7 @@ namespace Raytracer
             public:
                 Camera();
                 Camera(unsigned int width, unsigned int height);
+                Camera(unsigned int width, unsigned int height, unsigned int fov);
                 Camera(const Camera &other);
                 ~Camera() = default;
 
@@ -30,12 +31,14 @@ namespace Raytracer
 
                 unsigned int width() const;
                 unsigned int height() const;
+                unsigned int fov() const;
 
             private:
                 Raytracer::Math::Point3D _origin;
                 Rectangle3D _screen;
                 unsigned int _width;
                 unsigned int _height;
+                unsigned int _fov;
         };
     }
 }
