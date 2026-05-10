@@ -67,7 +67,7 @@ OBJ     =   $(SRC:.cpp=.o)
 
 NAME    =   raytracer
 
-CXXFLAGS = -Wextra -Wall $(addprefix -I, $(sort $(dir $(INCLUDE)))) -std=c++20
+CXXFLAGS = -Wextra -Wall $(addprefix -I, $(sort $(dir $(INCLUDE)))) -std=c++20 -lconfig++
 
 LDLIBS   = -lm
 

@@ -9,6 +9,7 @@
 
     #include <string>
     #include <filesystem>
+    #include <libconfig.h++>
 
     #include "RTCError.hpp"
 
