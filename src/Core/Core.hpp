@@ -22,8 +22,7 @@
     #include "IPrimitive.hpp"
     #include "PrimitiveFactory.hpp"
     #include "ILight.hpp"
-    #include "PointLight.hpp"
-    #include "DirectionalLight.hpp"
+    #include "LightFactory.hpp"
 
 namespace Raytracer
 {

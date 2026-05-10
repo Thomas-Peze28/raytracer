@@ -29,11 +29,13 @@ PRIMITIVES_INCLUDE =	src/Object/Primitive/IPrimitive/IPrimitive.hpp \
 						src/Factory/PrimitiveFactory/PrimitiveFactory.hpp \
 
 LIGHTS_SRC		=	src/Object/Light/PointLight/PointLight.cpp \
-					src/Object/Light/DirectionalLight/DirectionalLight.cpp
+					src/Object/Light/DirectionalLight/DirectionalLight.cpp \
+					src/Factory/LightFactory/LightFactory.cpp \
 
 LIGHTS_INCLUDE	=	src/Object/Light/ILight/ILight.hpp \
 					src/Object/Light/PointLight/PointLight.hpp \
-					src/Object/Light/DirectionalLight/DirectionalLight.hpp
+					src/Object/Light/DirectionalLight/DirectionalLight.hpp \
+					src/Factory/LightFactory/LightFactory.hpp \
 
 SRC     =   src/main.cpp \
 			src/Parser/Parser.cpp \
