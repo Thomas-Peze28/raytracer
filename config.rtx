@@ -1,6 +1,6 @@
 camera:
 {
-  resolution = { width = 800; height = 800; };
+  resolution = { width = 1200; height = 720; };
   position = { x = 0; y = -100; z = 20; };
   fov = 90.0;
 };
