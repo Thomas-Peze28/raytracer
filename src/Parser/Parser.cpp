@@ -103,6 +103,11 @@ void Raytracer::Parser::loadScene(const std::string &filepath, Scene &scene)
     LightFactory lightFactory;
 
     try {
+
+        if (filepath.length() < 4 || filepath.substr(filepath.length() - 4) != ".rtx") {
+            throw ErrorMajor("Invalid file extension for scene file (must be .rtx): " + filepath);
+        }
+
         config.readFile(filepath.c_str());
 
         if (config.exists("camera")) {
