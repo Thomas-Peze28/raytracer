@@ -7,6 +7,8 @@
 
 #include "Core.hpp"
 
+bool Raytracer::Core::_signal = false;
+
 /**
 * Displays help information for the raytracer.
 * @param argc The number of command-line arguments.
@@ -101,6 +103,13 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
     return pixel_color;
 }
 
+void Raytracer::Core::signalHandler(int signal)
+{
+    if (signal == SIGINT) {
+        _signal = true;
+    }
+}
+
 /**
 * Runs the raytracer with the given scene.
 * @param scene The scene to render.
@@ -108,17 +117,25 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
 **/
 int Raytracer::Core::run(Raytracer::Scene &scene)
 {
+    std::signal(SIGINT, signalHandler);
+
     std::cout << "P3\n" << scene.camera.width() << " " << scene.camera.height() << "\n255\n";
 
         for (unsigned int j = 0; j < scene.camera.height(); j++) {
             for (unsigned int i = 0; i < scene.camera.width(); i++) {
-            double u = double(i) / double(scene.camera.width());
-            double v = double(j) / double(scene.camera.height());
-            
-            Raytracer::Object::Ray r = scene.camera.ray(u, v);
-    
-            Math::Vector3D pixel_color = ray_color(r, scene); 
-            write_color(pixel_color);
+
+                if (_signal == true) {
+                    write_color(Math::Vector3D(0, 0, 0));
+                    continue;
+                }
+
+                double u = double(i) / double(scene.camera.width());
+                double v = double(j) / double(scene.camera.height());
+
+                Raytracer::Object::Ray r = scene.camera.ray(u, v);
+                
+                Math::Vector3D pixel_color = ray_color(r, scene); 
+                write_color(pixel_color);
         }
     }
     return 0;

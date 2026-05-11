@@ -10,6 +10,7 @@
     #include <cstdlib>
     #include <string>
     #include <iostream>
+    #include <csignal>
 
     #include "RTCError.hpp"
     
@@ -43,6 +44,9 @@ namespace Raytracer
 
             float _ambient_factor;
             float _diffuse_factor;
+
+            static void signalHandler(int signal);
+            static bool _signal;
 
         private:
             Parser _parser;
