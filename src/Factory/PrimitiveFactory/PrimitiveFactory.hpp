@@ -6,6 +6,7 @@
 #include <memory>
 #include <libconfig.h++>
 
+#include "RTCError.hpp"
 #include "IPrimitive.hpp"
 #include "Sphere.hpp"
 #include "Plane.hpp"

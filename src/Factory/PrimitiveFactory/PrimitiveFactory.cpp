@@ -37,7 +37,7 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
     if (it != _creators.end()) {
         return it->second(setting);
     }
-    throw std::runtime_error("Unknown primitive type: " + type);
+    throw ErrorMajor("Unknown primitive type: " + type);
 }
 
 /** 
@@ -52,9 +52,14 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
     double z = settings.lookup("z");
     double r = settings.lookup("r");
 
-    int cr = settings.lookup("color.r");
-    int cg = settings.lookup("color.g");
-    int cb = settings.lookup("color.b");
+    int cr = 255;
+    int cg = 255;
+    int cb = 255;
+    if (settings.exists("color")) {
+        cr = settings.lookup("color.r");
+        cg = settings.lookup("color.g");
+        cb = settings.lookup("color.b");
+    }
 
     return std::make_unique<Object::Sphere>(
         Math::Point3D(x, y, z), 
@@ -73,9 +78,14 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
     std::string axis_str = settings.lookup("axis");
     double position = settings.lookup("position");
 
-    int cr = settings.lookup("color.r");
-    int cg = settings.lookup("color.g");
-    int cb = settings.lookup("color.b");
+    int cr = 255;
+    int cg = 255;
+    int cb = 255;
+    if (settings.exists("color")) {
+        cr = settings.lookup("color.r");
+        cg = settings.lookup("color.g");
+        cb = settings.lookup("color.b");
+    }
 
     return std::make_unique<Object::Plane>(
         axis_str[0], 
@@ -98,9 +108,14 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
     double r = settings.lookup("r");
     double h = settings.lookup("h");
 
-    int cr = settings.lookup("color.r");
-    int cg = settings.lookup("color.g");
-    int cb = settings.lookup("color.b");
+    int cr = 255;
+    int cg = 255;
+    int cb = 255;
+    if (settings.exists("color")) {
+        cr = settings.lookup("color.r");
+        cg = settings.lookup("color.g");
+        cb = settings.lookup("color.b");
+    }
 
     return std::make_unique<Object::Cylinder>(
         Math::Point3D(x, y, z), 
@@ -124,9 +139,14 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
     double r = settings.lookup("r");
     double h = settings.lookup("h");
 
-    int cr = settings.lookup("color.r");
-    int cg = settings.lookup("color.g");
-    int cb = settings.lookup("color.b");
+    int cr = 255;
+    int cg = 255;
+    int cb = 255;
+    if (settings.exists("color")) {
+        cr = settings.lookup("color.r");
+        cg = settings.lookup("color.g");
+        cb = settings.lookup("color.b");
+    }
 
     return std::make_unique<Object::Cone>(
         Math::Point3D(x, y, z), 
