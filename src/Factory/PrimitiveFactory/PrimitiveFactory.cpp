@@ -8,14 +8,22 @@
 #include "PrimitiveFactory.hpp"
 
 /** 
-* @brief Construct a new Primitive Factory:: Primitive Factory object
+* @brief Construct a new Primitive Factory
 **/
 Raytracer::PrimitiveFactory::PrimitiveFactory()
 {
-    _creators["sphere"] = []() { return std::make_unique<Object::Sphere>(); };
-    _creators["plane"] = []() { return std::make_unique<Object::Plane>(); };
-    _creators["cylinder"] = []() { return std::make_unique<Object::Cylinder>(); };
-    _creators["cone"] = []() { return std::make_unique<Object::Cone>(); };
+    _creators["sphere"] = [this](const libconfig::Setting &setting) {
+        return createSphere(setting);
+    };
+    _creators["plane"] = [this](const libconfig::Setting &setting) {
+        return createPlane(setting);
+    };
+    _creators["cylinder"] = [this](const libconfig::Setting &setting) {
+        return createCylinder(setting);
+    };
+    _creators["cone"] = [this](const libconfig::Setting &setting) {
+        return createCone(setting);
+    };
 }
 
 /** 
@@ -23,11 +31,107 @@ Raytracer::PrimitiveFactory::PrimitiveFactory()
 * @param type The type of the primitive to create
 * @return A unique pointer to the created primitive
 **/
-std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::createPrimitive(const std::string &type) const
+std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::createPrimitive(const std::string &type, const libconfig::Setting &setting) const
 {
     auto it = _creators.find(type);
     if (it != _creators.end()) {
-        return it->second();
+        return it->second(setting);
     }
     throw std::runtime_error("Unknown primitive type: " + type);
+}
+
+/** 
+* @brief Create a new sphere instance
+* @param settings The configuration settings for the sphere
+* @return A unique pointer to the created sphere
+**/
+std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::createSphere(const libconfig::Setting &settings) const
+{
+    double x = settings.lookup("x");
+    double y = settings.lookup("y");
+    double z = settings.lookup("z");
+    double r = settings.lookup("r");
+
+    int cr = settings.lookup("color.r");
+    int cg = settings.lookup("color.g");
+    int cb = settings.lookup("color.b");
+
+    return std::make_unique<Object::Sphere>(
+        Math::Point3D(x, y, z), 
+        r, 
+        Math::Vector3D(cr, cg, cb)
+    );
+}
+
+/** 
+* @brief Create a new plane instance
+* @param settings The configuration settings for the plane
+* @return A unique pointer to the created plane
+**/
+std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::createPlane(const libconfig::Setting &settings) const
+{
+    std::string axis_str = settings.lookup("axis");
+    double position = settings.lookup("position");
+
+    int cr = settings.lookup("color.r");
+    int cg = settings.lookup("color.g");
+    int cb = settings.lookup("color.b");
+
+    return std::make_unique<Object::Plane>(
+        axis_str[0], 
+        position, 
+        Math::Vector3D(cr, cg, cb)
+    );
+}
+
+/** 
+* @brief Create a new cylinder instance
+* @param settings The configuration settings for the cylinder
+* @return A unique pointer to the created cylinder
+**/
+std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::createCylinder(const libconfig::Setting &settings) const
+{
+    double x = settings.lookup("x");
+    double y = settings.lookup("y");
+    double z = settings.lookup("z");
+
+    double r = settings.lookup("r");
+    double h = settings.lookup("h");
+
+    int cr = settings.lookup("color.r");
+    int cg = settings.lookup("color.g");
+    int cb = settings.lookup("color.b");
+
+    return std::make_unique<Object::Cylinder>(
+        Math::Point3D(x, y, z), 
+        r, 
+        h, 
+        Math::Vector3D(cr, cg, cb)
+    );
+}
+
+/** 
+* @brief Create a new cone instance
+* @param settings The configuration settings for the cone
+* @return A unique pointer to the created cone
+**/
+std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::createCone(const libconfig::Setting &settings) const
+{
+    double x = settings.lookup("x");
+    double y = settings.lookup("y");
+    double z = settings.lookup("z");
+
+    double r = settings.lookup("r");
+    double h = settings.lookup("h");
+
+    int cr = settings.lookup("color.r");
+    int cg = settings.lookup("color.g");
+    int cb = settings.lookup("color.b");
+
+    return std::make_unique<Object::Cone>(
+        Math::Point3D(x, y, z), 
+        r, 
+        h, 
+        Math::Vector3D(cr, cg, cb)
+    );
 }
