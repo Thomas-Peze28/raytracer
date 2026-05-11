@@ -71,6 +71,36 @@ Raytracer::Math::Vector3D Raytracer::Core::compute_lambert_lighting(const Raytra
 }
 
 /**
+* Adds an observer to the list of observers.
+* @param observer The observer to add.
+**/
+void Raytracer::Core::addObserver(Raytracer::IProgressObserver* observer)
+{
+    _observers.push_back(observer);
+}
+
+/**
+* Removes an observer from the list of observers.
+* @param observer The observer to remove.
+**/
+void Raytracer::Core::removeObserver(Raytracer::IProgressObserver* observer)
+{
+    _observers.erase(std::remove(_observers.begin(), _observers.end(), observer), _observers.end());
+}
+
+/**
+* Notifies all observers of a progress update.
+* @param current The current progress.
+* @param total The total progress.
+**/
+void Raytracer::Core::notifyObservers(unsigned int current, unsigned int total)
+{
+    for (auto observer : _observers) {
+        observer->update(current, total);
+    }
+}
+
+/**
 * Calculates the color of a ray after it intersects with objects in the scene.
 * @param ray The ray to trace.
 * @param scene The scene containing objects and lights.
@@ -103,6 +133,10 @@ Raytracer::Math::Vector3D Raytracer::Core::ray_color(const Raytracer::Object::Ra
     return pixel_color;
 }
 
+/**
+* Handles the signal for interrupting the raytracer.
+* @param signal The signal received.
+**/
 void Raytracer::Core::signalHandler(int signal)
 {
     if (signal == SIGINT) {
@@ -122,6 +156,9 @@ int Raytracer::Core::run(Raytracer::Scene &scene)
     std::cout << "P3\n" << scene.camera.width() << " " << scene.camera.height() << "\n255\n";
 
         for (unsigned int j = 0; j < scene.camera.height(); j++) {
+
+            notifyObservers(j, scene.camera.height());
+
             for (unsigned int i = 0; i < scene.camera.width(); i++) {
 
                 if (_signal == true) {

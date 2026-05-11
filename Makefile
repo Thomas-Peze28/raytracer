@@ -46,7 +46,8 @@ SRC     =   src/main.cpp \
 			src/Scene/Scene.cpp \
 			src/Object/Camera/Camera.cpp \
 			$(PRIMITIVES_SRC) \
-			$(LIGHTS_SRC)
+			$(LIGHTS_SRC) \
+			src/ProgressBar/ProgressBar.cpp \
 			
 
 INCLUDE =   include/Raytracer.hpp \
@@ -59,7 +60,10 @@ INCLUDE =   include/Raytracer.hpp \
 			src/Object/Ray/Ray.hpp \
 			src/Object/Camera/Camera.hpp \
 			$(PRIMITIVES_INCLUDE) \
-			$(LIGHTS_INCLUDE)
+			$(LIGHTS_INCLUDE) \
+			src/Observer/IProgressObserver.hpp \
+			src/Observer/IProgressObservable.hpp \
+			src/ProgressBar/ProgressBar.hpp \
 
 CXX     =   g++
 

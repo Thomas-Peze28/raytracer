@@ -21,9 +21,12 @@ int main(int argc, char *argv[])
         parser.loadScene(argv[1], scene);
 
         Raytracer::Core core;
+        Raytracer::ProgressBar progressBar;
 
         core._ambient_factor = scene._ambient_factor;
         core._diffuse_factor = scene._diffuse_factor;
+
+        core.addObserver(&progressBar);
 
         return core.run(scene);
 
