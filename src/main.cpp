@@ -18,5 +18,8 @@ int main(int argc, char *argv[])
 
     Raytracer::Core core;
 
+    core._ambient_factor = scene._ambient_factor;
+    core._diffuse_factor = scene._diffuse_factor;
+
     return core.run(scene);
 }

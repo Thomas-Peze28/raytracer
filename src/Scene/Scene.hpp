@@ -25,5 +25,8 @@ namespace Raytracer {
             Object::Camera camera;
             std::vector<std::unique_ptr<Object::ILight>> lights;
             std::vector<std::unique_ptr<Object::IPrimitive>> objects;
+
+            float _ambient_factor;
+            float _diffuse_factor;
     };
 }

@@ -41,8 +41,8 @@ namespace Raytracer
 
             Raytracer::Math::Vector3D ray_color(const Raytracer::Object::Ray &ray, const Raytracer::Scene &scene) const;
 
-            float _ambient_factor = 0.15f;
-            float _diffuse_factor = 1.0f;
+            float _ambient_factor;
+            float _diffuse_factor;
 
         private:
             Parser _parser;
