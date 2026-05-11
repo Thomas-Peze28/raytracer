@@ -13,6 +13,7 @@
 #include <memory>
 #include <libconfig.h++>
 
+#include "RTCError.hpp"
 #include "ILight.hpp"
 #include "PointLight.hpp"
 #include "DirectionalLight.hpp"

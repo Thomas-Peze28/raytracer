@@ -32,7 +32,7 @@ std::unique_ptr<Raytracer::Object::ILight> Raytracer::LightFactory::createLight(
     if (it != _creators.end()) {
         return it->second(setting);
     }
-    throw std::runtime_error("Unknown light type: " + type);
+    throw ErrorMajor("Unknown light type: " + type);
 }
 
 /** 

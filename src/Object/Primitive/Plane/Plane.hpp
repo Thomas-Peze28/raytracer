@@ -11,6 +11,7 @@
     #include "Vector3D.hpp"
     #include "Ray.hpp"
     #include "IPrimitive.hpp"
+    #include "RTCError.hpp"
 
 namespace Raytracer
 {

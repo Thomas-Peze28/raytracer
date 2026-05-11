@@ -23,7 +23,7 @@ Raytracer::Object::Plane::Plane(const char axis, float position, const Math::Vec
     } else if (_axis == 'z') {
         _normal = Math::Vector3D(0.0f, 0.0f, 1.0f);
     } else {
-        throw std::invalid_argument("Invalid axis for plane: " + std::string(1, _axis));
+        throw ErrorMajor("Invalid axis for plane: " + std::string(1, _axis));
     }
 }
 
