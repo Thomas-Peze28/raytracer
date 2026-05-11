@@ -26,5 +26,7 @@ namespace Raytracer
             ~Parser() = default;
 
             void loadScene(const std::string &filepath, Scene &scene);
+            void loadLights(const libconfig::Setting &lightsSetting, Scene &scene);
+            void loadPrimitives(const libconfig::Setting &primitivesSetting, Scene &scene);
     };
 };
