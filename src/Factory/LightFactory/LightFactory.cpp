@@ -46,10 +46,24 @@ std::unique_ptr<Raytracer::Object::ILight> Raytracer::LightFactory::createPointL
     double y = settings.lookup("y");
     double z = settings.lookup("z");
 
+    int cr = 255;
+    int cg = 255;
+    int cb = 255;
+    if (settings.exists("color")) {
+        cr = settings.lookup("color.r");
+        cg = settings.lookup("color.g");
+        cb = settings.lookup("color.b");
+    }
+    
+    double intensity = 1.0;
+    if (settings.exists("intensity")) {
+        intensity = settings.lookup("intensity");
+    }
+
     return std::make_unique<Object::PointLight>(
         Math::Point3D(x, y, z), 
-        Math::Vector3D(255, 255, 255), 
-        1.0f
+        Math::Vector3D(cr, cg, cb), 
+        intensity
     );
 }
 
@@ -64,9 +78,22 @@ std::unique_ptr<Raytracer::Object::ILight> Raytracer::LightFactory::createDirect
     double y = settings.lookup("y");
     double z = settings.lookup("z");
 
+    int cr = 255;
+    int cg = 255;
+    int cb = 255;
+    
+    if (settings.exists("color")) {
+        cr = settings.lookup("color.r");
+        cg = settings.lookup("color.g");
+        cb = settings.lookup("color.b");
+    }
+
+    double intensity = 1.0;
+    settings.lookupValue("intensity", intensity);
+
     return std::make_unique<Object::DirectionalLight>(
         Math::Vector3D(x, y, z), 
-        Math::Vector3D(255, 255, 255), 
-        1.0f
+        Math::Vector3D(cr, cg, cb), 
+        intensity
     );
 }
