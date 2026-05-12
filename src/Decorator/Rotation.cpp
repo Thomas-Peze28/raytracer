@@ -14,5 +14,15 @@ Raytracer::Object::Rotation::Rotation(std::unique_ptr<IPrimitive> object, const 
 
 Raytracer::HitResult Raytracer::Object::Rotation::hit(const Ray &ray) const
 {
-   
+   // TODO
+}
+
+Raytracer::Math::Vector3D Raytracer::Object::Rotation::rotate(const Math::Vector3D &v, double angleX, double angleY, double angleZ) const
+{
+    // TODO
+}
+
+Raytracer::Math::Point3D Raytracer::Object::Rotation::rotate(const Math::Point3D &p, double angleX, double angleY, double angleZ) const
+{
+    // TODO
 }

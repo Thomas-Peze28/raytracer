@@ -26,6 +26,9 @@ namespace Raytracer {
             private:
                 std::unique_ptr<IPrimitive> _object;
                 Math::Vector3D _angles;
+
+                Math::Vector3D rotate(const Math::Vector3D &v, double angleX, double angleY, double angleZ) const;
+                Math::Point3D rotate(const Math::Point3D &p, double angleX, double angleY, double angleZ) const;
         };
     }
 }
