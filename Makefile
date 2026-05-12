@@ -48,6 +48,7 @@ SRC     =   src/main.cpp \
 			$(PRIMITIVES_SRC) \
 			$(LIGHTS_SRC) \
 			src/ProgressBar/ProgressBar.cpp \
+			src/Decorator/Translation.cpp \
 			
 
 INCLUDE =   include/Raytracer.hpp \
@@ -64,6 +65,7 @@ INCLUDE =   include/Raytracer.hpp \
 			src/Observer/IProgressObserver.hpp \
 			src/Observer/IProgressObservable.hpp \
 			src/ProgressBar/ProgressBar.hpp \
+			src/Decorator/Translation.hpp \
 
 CXX     =   g++
 

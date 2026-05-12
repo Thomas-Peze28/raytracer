@@ -61,11 +61,22 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cb = settings.lookup("color.b");
     }
 
-    return std::make_unique<Object::Sphere>(
+    std::unique_ptr<Object::IPrimitive> sphere = std::make_unique<Object::Sphere>(
         Math::Point3D(x, y, z), 
         r, 
         Math::Vector3D(cr, cg, cb)
     );
+
+    if (settings.exists("translation")) {
+        const libconfig::Setting &t = settings.lookup("translation");
+        double tx = t.lookup("x");
+        double ty = t.lookup("y");
+        double tz = t.lookup("z");
+        Math::Vector3D offset(tx, ty, tz);
+        sphere = std::make_unique<Object::Translation>(std::move(sphere), offset);
+    }
+    
+    return sphere;
 }
 
 /** 
@@ -87,11 +98,22 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cb = settings.lookup("color.b");
     }
 
-    return std::make_unique<Object::Plane>(
+    std::unique_ptr<Object::IPrimitive> plane = std::make_unique<Object::Plane>(
         axis_str[0], 
         position, 
         Math::Vector3D(cr, cg, cb)
     );
+
+    if (settings.exists("translation")) {
+        const libconfig::Setting &t = settings.lookup("translation");
+        double tx = t.lookup("x");
+        double ty = t.lookup("y");
+        double tz = t.lookup("z");
+        Math::Vector3D offset(tx, ty, tz);
+        plane = std::make_unique<Object::Translation>(std::move(plane), offset);
+    }
+
+    return plane;
 }
 
 /** 
@@ -117,12 +139,23 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cb = settings.lookup("color.b");
     }
 
-    return std::make_unique<Object::Cylinder>(
+    std::unique_ptr<Object::IPrimitive> cylinder = std::make_unique<Object::Cylinder>(
         Math::Point3D(x, y, z), 
         r, 
         h, 
         Math::Vector3D(cr, cg, cb)
     );
+
+    if (settings.exists("translation")) {
+        const libconfig::Setting &t = settings.lookup("translation");
+        double tx = t.lookup("x");
+        double ty = t.lookup("y");
+        double tz = t.lookup("z");
+        Math::Vector3D offset(tx, ty, tz);
+        cylinder = std::make_unique<Object::Translation>(std::move(cylinder), offset);
+    }
+
+    return cylinder;
 }
 
 /** 
@@ -148,10 +181,21 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cb = settings.lookup("color.b");
     }
 
-    return std::make_unique<Object::Cone>(
+    std::unique_ptr<Object::IPrimitive> cone = std::make_unique<Object::Cone>(
         Math::Point3D(x, y, z), 
         r, 
         h, 
         Math::Vector3D(cr, cg, cb)
     );
+
+    if (settings.exists("translation")) {
+        const libconfig::Setting &t = settings.lookup("translation");
+        double tx = t.lookup("x");
+        double ty = t.lookup("y");
+        double tz = t.lookup("z");
+        Math::Vector3D offset(tx, ty, tz);
+        cone = std::make_unique<Object::Translation>(std::move(cone), offset);
+    }
+
+    return cone;
 }

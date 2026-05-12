@@ -13,6 +13,8 @@
 #include "Cylinder.hpp"
 #include "Cone.hpp"
 
+#include "Translation.hpp"
+
 namespace Raytracer {
     class PrimitiveFactory {
         public:
