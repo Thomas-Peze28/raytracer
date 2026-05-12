@@ -8,31 +8,31 @@
 #include "Sphere.hpp"
 
 /** 
- * @brief Construct a new Sphere object
- * @param center The center of the sphere
- * @param radius The radius of the sphere
- * @return A new Sphere object with red default color
-*/
+* @brief Construct a new Sphere object
+* @param center The center of the sphere
+* @param radius The radius of the sphere
+* @return A new Sphere object with red default color
+**/
 Raytracer::Object::Sphere::Sphere(const Math::Point3D &center, double radius) : _center(center), _radius(radius), _color(255, 0, 0)
 {
 }
 
 /** 
- * @brief Construct a new Sphere object
- * @param center The center of the sphere
- * @param radius The radius of the sphere
- * @param color The color of the sphere
- * @return A new Sphere object with the specified color
-*/
+* @brief Construct a new Sphere object
+* @param center The center of the sphere
+* @param radius The radius of the sphere
+* @param color The color of the sphere
+* @return A new Sphere object with the specified color
+**/
 Raytracer::Object::Sphere::Sphere(const Math::Point3D &center, double radius, const Math::Vector3D &color) : _center(center), _radius(radius), _color(color)
 {
 }
 
 /**
- * @brief Construct a new Sphere object by copying another Sphere object
- * @param other The other sphere
- * @return A new Sphere object
-*/
+* @brief Construct a new Sphere object by copying another Sphere object
+* @param other The other sphere
+* @return A new Sphere object
+**/
 Raytracer::Object::Sphere::Sphere(const Sphere &other) : _center(other._center), _radius(other._radius), _color(other._color)
 {
 }
