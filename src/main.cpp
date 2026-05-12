@@ -7,12 +7,34 @@
 
 #include "Core.hpp"
 
-int main(int argc, char *argv[])
+int usage(int argc, char *argv[])
 {
-    if (argc != 2) {
-        std::cerr << "USAGE: ./raytracer <SCENE_FILE>" << std::endl;
+    if (argc != 2 && argc != 4) {
+        std::cerr << "USAGE: ./raytracer <SCENE_FILE> [-f <OUTPUT_FILE_NAME>]" << std::endl;
         return 84;
     }
+    if (argc == 4 && std::string(argv[2]) != "-f") {
+        std::cerr << "USAGE: ./raytracer <SCENE_FILE> [-f <OUTPUT_FILE_NAME>]" << std::endl;
+        return 84;
+    }
+    if (argc == 3 || (argc == 4 && (!argv[3] || std::string(argv[3]).empty()))) {
+        std::cerr << "USAGE: ./raytracer <SCENE_FILE> [-f <OUTPUT_FILE_NAME>]" << std::endl;
+        return 84;
+    }
+    if (std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help") {
+        std::cout << "Usage: ./raytracer <SCENE_FILE> [-f <OUTPUT_FILE_NAME>]" << std::endl;
+        std::cout << "\t<SCENE_FILE>: Path to the scene configuration file." << std::endl;
+        std::cout << "\t-f <OUTPUT_FILE_NAME>: Optional flag to specify the output file name for the rendered image." << std::endl;
+        return 0;
+    }
+    return 1;
+}
+
+int main(int argc, char *argv[])
+{
+    int rc = usage(argc, argv);
+    if (rc != 1)
+        return rc;
 
     try {
         Raytracer::Scene scene;
@@ -23,6 +45,15 @@ int main(int argc, char *argv[])
         Raytracer::Core core;
         Raytracer::ProgressBar progressBar;
 
+        std::string output_file_name;
+        if (argc == 4)
+            core.setOutputFileName(std::string(argv[3]) + ".ppm");
+        else
+            core.setOutputFileName("output.ppm");
+        if (!core.openOutputFile()) {
+            std::cerr << "Error: Could not open output file: " << core.getOutputFileName() << std::endl;
+            return 84;
+        }
         core._ambient_factor = scene._ambient_factor;
         core._diffuse_factor = scene._diffuse_factor;
 

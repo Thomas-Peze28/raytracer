@@ -30,7 +30,7 @@ bool Raytracer::Core::displayHelp(int argc, char *argv[])
     return false;
 }
 
-void Raytracer::Core::write_color(Raytracer::Math::Vector3D color) const
+void Raytracer::Core::write_color(Raytracer::Math::Vector3D color)
 {
     int r = color._x;
     int g = color._y;
@@ -49,7 +49,13 @@ void Raytracer::Core::write_color(Raytracer::Math::Vector3D color) const
     if (b > 255)
         b = 255;
 
-    std::cout << r << " " << g << " " << b << std::endl;
+    _output_file << r << " " << g << " " << b << "\n";
+}
+
+bool Raytracer::Core::openOutputFile()
+{
+    _output_file.open(_output_file_name);
+    return _output_file.is_open();
 }
 
 /**
@@ -153,7 +159,7 @@ int Raytracer::Core::run(Raytracer::Scene &scene)
 {
     std::signal(SIGINT, signalHandler);
 
-    std::cout << "P3\n" << scene.camera.width() << " " << scene.camera.height() << "\n255\n";
+    _output_file << "P3\n" << scene.camera.width() << " " << scene.camera.height() << "\n255\n";
 
         for (unsigned int j = 0; j < scene.camera.height(); j++) {
 

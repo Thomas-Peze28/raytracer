@@ -10,9 +10,8 @@
     #include <cstdlib>
     #include <string>
     #include <iostream>
+    #include <fstream>
     #include <csignal>
-
-    #include "RTCError.hpp"
     
     #include "Point3D.hpp"
     #include "Vector3D.hpp"
@@ -35,9 +34,13 @@ namespace Raytracer
         public:
             Core() = default;
             ~Core() = default;
+
+            std::string getOutputFileName() const { return _output_file_name; }
+            void setOutputFileName(const std::string &filename) { _output_file_name = filename; }
         
             int run(Scene &scene);
-            void write_color(Math::Vector3D color) const;
+            void write_color(Math::Vector3D color);
+            bool openOutputFile();
 
             bool displayHelp(int argc, char *argv[]);
             
@@ -56,6 +59,8 @@ namespace Raytracer
             static bool _signal;
 
         private:
+            std::string _output_file_name;
+            std::ofstream _output_file;
             Parser _parser;
             std::vector<IProgressObserver*> _observers;
 
