@@ -18,19 +18,20 @@
 void Raytracer::ProgressBar::update(unsigned int current, unsigned int total)
 {
     float progress = (float)current / total;
-    int barWidth = 100;
+    int barWidth = 50;
     int pos = barWidth * progress;
 
-    std::cerr << "\r[";
+    std::cout << "\r[";
     for (int i = 0; i < barWidth; ++i) {
         if (i < pos)
-            std::cerr << "=";
+            std::cout << "=";
         else
-            std::cerr << " ";
+            std::cout << " ";
     }
-    std::cerr << "] " << int(progress * 100.0) << " %";
+    std::cout << "] " << int(progress * 100.0) << " %";
 
     if (current == total - 1) {
-        std::cerr << "\r[" << std::string(barWidth, '=') << "] 100 %\n";
+        std::cout << "\r[" << std::string(barWidth, '=') << "] 100 %\n";
     }
+    std::cout.flush();
 }
