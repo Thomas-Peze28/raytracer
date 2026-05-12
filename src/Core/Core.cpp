@@ -159,6 +159,8 @@ int Raytracer::Core::run(Raytracer::Scene &scene)
 {
     std::signal(SIGINT, signalHandler);
 
+    std::srand(std::time(nullptr));
+
     _output_file << "P3\n" << scene.camera.width() << " " << scene.camera.height() << "\n255\n";
 
         for (unsigned int j = 0; j < scene.camera.height(); j++) {
@@ -172,12 +174,17 @@ int Raytracer::Core::run(Raytracer::Scene &scene)
                     continue;
                 }
 
-                double u = double(i) / double(scene.camera.width());
-                double v = double(j) / double(scene.camera.height());
+                Math::Vector3D accumulated_color(0, 0, 0);
+                for (int s = 0; s < scene._samples_per_pixel; ++s) {
+                    double randomu = (double)std::rand() / (RAND_MAX + 1.0);
+                    double randomv = (double)std::rand() / (RAND_MAX + 1.0);
+                    double u = (double(i) + randomu) / double(scene.camera.width());
+                    double v = (double(j) + randomv) / double(scene.camera.height());
 
-                Raytracer::Object::Ray r = scene.camera.ray(u, v);
-                
-                Math::Vector3D pixel_color = ray_color(r, scene); 
+                    Raytracer::Object::Ray r = scene.camera.ray(u, v);
+                    accumulated_color += ray_color(r, scene);
+                }
+                Math::Vector3D pixel_color = accumulated_color / double(scene._samples_per_pixel);
                 write_color(pixel_color);
         }
     }

@@ -28,5 +28,6 @@ namespace Raytracer {
 
             float _ambient_factor;
             float _diffuse_factor;
+            int _samples_per_pixel;
     };
 }

@@ -116,8 +116,11 @@ void Raytracer::Parser::loadScene(const std::string &filepath, Scene &scene)
             int width = cameraSetting.lookup("resolution.width");
             int height = cameraSetting.lookup("resolution.height");
             float fov = 60.0f;
+            int samples_per_pixel = 50;
 
             cameraSetting.lookupValue("fov", fov);
+            cameraSetting.lookupValue("spp", samples_per_pixel);
+            scene._samples_per_pixel = samples_per_pixel;
             scene.camera = Object::Camera(width, height, fov);
         }
 
