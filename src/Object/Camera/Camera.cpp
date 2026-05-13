@@ -16,6 +16,9 @@ Raytracer::Object::Camera::Camera()
             Math::Vector3D(0.0f, 2.0f, 0.0f)
         );
     _fov = 90;
+    _lookFrom = Math::Point3D(0.0f, 0.0f, 0.0f);
+    _lookAt = Math::Point3D(0.0f, 0.0f, -1.0f);
+    _up = Math::Vector3D(0.0f, 1.0f, 0.0f);
 }
 
 /** 
@@ -28,19 +31,29 @@ Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height) {
     _width = width;
     _height = height;
     _fov = 90;
+    _lookFrom = Math::Point3D(0.0f, 0.0f, 0.0f);
+    _lookAt = Math::Point3D(0.0f, 0.0f, -1.0f);
+    _up = Math::Vector3D(0.0f, 1.0f, 0.0f);
+
+    _origin = _lookFrom;
 
     double theta = _fov * (M_PI / 180.0);
     double h = tan(theta / 2.0);
 
     double aspect_ratio = double(_width) / double(_height);
-    double base_width = 2.0f * h * aspect_ratio;
-    double base_height = 2.0f * h; 
+    double viewport_height = 2.0 * h;
+    double viewport_width = aspect_ratio * viewport_height;
 
-    _origin = Math::Point3D(0.0f, 0.0f, 0.0f);
+    Math::Vector3D w = (_lookFrom - _lookAt).normalized();
+    Math::Vector3D u = _up.cross(w).normalized();
+    Math::Vector3D v = w.cross(u);
+
+    Math::Point3D lower_left = _origin - (u * (viewport_width / 2.0)) - (v * (viewport_height / 2.0)) - w;
+
     _screen = Rectangle3D(
-        Math::Point3D(-base_width / 2.0f, -base_height / 2.0f, -1.0f),
-        Math::Vector3D(base_width, 0.0f, 0.0f),
-        Math::Vector3D(0.0f, base_height, 0.0f)
+        lower_left,
+        u * viewport_width,
+        v * viewport_height
     );
 }
 
@@ -48,19 +61,55 @@ Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height, unsig
     _width = width;
     _height = height;
     _fov = fov;
+    _lookFrom = Math::Point3D(0.0f, 0.0f, 0.0f);
+    _lookAt = Math::Point3D(0.0f, 0.0f, -1.0f);
+    _up = Math::Vector3D(0.0f, 1.0f, 0.0f);
 
     double theta = _fov * (M_PI / 180.0);
     double h = tan(theta / 2.0);
 
     double aspect_ratio = double(_width) / double(_height);
-    double base_width = 2.0f * h * aspect_ratio;
-    double base_height = 2.0f * h;
+    double viewport_height = 2.0 * h;
+    double viewport_width = aspect_ratio * viewport_height;
 
-    _origin = Math::Point3D(0.0f, 0.0f, 0.0f);
+    Math::Vector3D w = (_lookFrom - _lookAt).normalized();
+    Math::Vector3D u = _up.cross(w).normalized();
+    Math::Vector3D v = w.cross(u);
+
+    _origin = _lookFrom;
+    Math::Point3D lower_left = _origin - (u * (viewport_width / 2.0)) - (v * (viewport_height / 2.0)) - w;
     _screen = Rectangle3D(
-        Math::Point3D(-base_width / 2.0f, -base_height / 2.0f, -1.0f),
-        Math::Vector3D(base_width, 0.0f, 0.0f),
-        Math::Vector3D(0.0f, base_height, 0.0f)
+        lower_left,
+        u * viewport_width,
+        v * viewport_height
+    );
+}
+
+Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height, unsigned int fov, const Math::Point3D &lookFrom, const Math::Point3D &lookAt, const Math::Vector3D &up) {
+    _width = width;
+    _height = height;
+    _fov = fov;
+    _lookFrom = lookFrom;
+    _lookAt = lookAt;
+    _up = up;
+
+    double theta = _fov * (M_PI / 180.0);
+    double h = tan(theta / 2.0);
+
+    double aspect_ratio = double(_width) / double(_height);
+    double viewport_height = 2.0 * h;
+    double viewport_width = aspect_ratio * viewport_height;
+
+    Math::Vector3D w = (_lookFrom - _lookAt).normalized();
+    Math::Vector3D u = _up.cross(w).normalized();
+    Math::Vector3D v = w.cross(u);
+
+    _origin = lookFrom;
+    Math::Point3D lower_left = _origin - (u * (viewport_width / 2.0)) - (v * (viewport_height / 2.0)) - w;
+    _screen = Rectangle3D(
+        lower_left,
+        u * viewport_width,
+        v * viewport_height
     );
 }
 
@@ -74,7 +123,10 @@ Raytracer::Object::Camera::Camera(const Camera &other) :
     _screen(other._screen),
     _width(other._width),
     _height(other._height),
-    _fov(other._fov)
+    _fov(other._fov),
+    _lookFrom(other._lookFrom),
+    _lookAt(other._lookAt),
+    _up(other._up)
 {
 }
 
@@ -102,6 +154,9 @@ Raytracer::Object::Camera& Raytracer::Object::Camera::operator=(const Camera &ot
         _width = other._width;
         _height = other._height;
         _fov = other._fov;
+        _lookFrom = other._lookFrom;
+        _lookAt = other._lookAt;
+        _up = other._up;
     }
     return *this;
 }

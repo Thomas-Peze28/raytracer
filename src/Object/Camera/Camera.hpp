@@ -22,6 +22,7 @@ namespace Raytracer
                 Camera();
                 Camera(unsigned int width, unsigned int height);
                 Camera(unsigned int width, unsigned int height, unsigned int fov);
+                Camera(unsigned int width, unsigned int height, unsigned int fov, const Math::Point3D &lookFrom, const Math::Point3D &lookAt, const Math::Vector3D &up);
                 Camera(const Camera &other);
                 ~Camera() = default;
 
@@ -45,7 +46,7 @@ namespace Raytracer
 
                 Math::Point3D _lookFrom;
                 Math::Point3D _lookAt;
-                Math::Vector3D _up;
+                Math::Vector3D _up; 
         };
     }
 }
