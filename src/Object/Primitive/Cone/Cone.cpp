@@ -13,7 +13,7 @@
  * @param angle The angle of the cone
  * @param height The height of the cone
  * @return A new Cone object with red default color
-*/
+**/
 Raytracer::Object::Cone::Cone(const Math::Point3D &center, double angle, double height) : _center(center), _angle(angle), _height(height), _color(255, 0, 0)
 {
 }
@@ -25,7 +25,7 @@ Raytracer::Object::Cone::Cone(const Math::Point3D &center, double angle, double 
  * @param height The height of the cone
  * @param color The color of the cone
  * @return A new Cone object with the specified color
-*/
+**/
 Raytracer::Object::Cone::Cone(const Math::Point3D &center, double angle, double height, const Math::Vector3D &color) : _center(center), _angle(angle), _height(height), _color(color)
 {
 }
@@ -34,7 +34,7 @@ Raytracer::Object::Cone::Cone(const Math::Point3D &center, double angle, double 
  * @brief Construct a new Cone object by copying another Cone object
  * @param other The other cone to copy
  * @return A new Cone object that is a copy of the other cone
-*/
+**/
 Raytracer::Object::Cone::Cone(const Cone &other) : _center(other._center), _angle(other._angle), _height(other._height), _color(other._color)
 {
 }
