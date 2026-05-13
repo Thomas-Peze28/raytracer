@@ -70,6 +70,33 @@ float Raytracer::Math::Vector3D::dot(const Vector3D &other) const
 }
 
 /**
+* @brief Calculate the cross product of two vector 3D
+* @param other The other vector 3D
+* @return The cross product of the two vectors
+**/
+Raytracer::Math::Vector3D Raytracer::Math::Vector3D::cross(const Vector3D &other) const
+{
+    return Vector3D(
+        _y * other._z - _z * other._y,
+        _z * other._x - _x * other._z,
+        _x * other._y - _y * other._x
+    );
+}
+
+/**
+* @brief Normalize the vector 3D
+* @return The normalized vector 3D
+**/
+Raytracer::Math::Vector3D Raytracer::Math::Vector3D::normalized() const
+{
+    float len = length();
+    if (len == 0) {
+        return Vector3D(0, 0, 0);
+    }
+    return Vector3D(_x / len, _y / len, _z / len);
+}
+
+/**
 * @brief Add two vector 3D
 * @param other The other vector 3D
 * @return The sum of the two vectors

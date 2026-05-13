@@ -118,10 +118,38 @@ void Raytracer::Parser::loadScene(const std::string &filepath, Scene &scene)
             float fov = 60.0f;
             int samples_per_pixel = 50;
 
+            Math::Point3D lookFrom(0.0f, 0.0f, 0.0f);
+            Math::Point3D lookAt(0.0f, 0.0f, -1.0f);
+            Math::Vector3D up(0.0f, 1.0f, 0.0f);
+
+            if (cameraSetting.exists("position")) {
+                lookFrom = Math::Point3D(
+                    cameraSetting.lookup("position.x"),
+                    cameraSetting.lookup("position.y"),
+                    cameraSetting.lookup("position.z")
+                );
+            }
+
+            if (cameraSetting.exists("target")) {
+                lookAt = Math::Point3D(
+                    cameraSetting.lookup("target.x"),
+                    cameraSetting.lookup("target.y"),
+                    cameraSetting.lookup("target.z")
+                );
+            }
+
+            if (cameraSetting.exists("up")) {
+                up = Math::Vector3D(
+                    cameraSetting.lookup("up.x"),
+                    cameraSetting.lookup("up.y"),
+                    cameraSetting.lookup("up.z")
+                );
+            }
+
             cameraSetting.lookupValue("fov", fov);
             cameraSetting.lookupValue("spp", samples_per_pixel);
             scene._samples_per_pixel = samples_per_pixel;
-            scene.camera = Object::Camera(width, height, fov);
+            scene.camera = Object::Camera(width, height, fov, lookFrom, lookAt, up);
         }
 
         if (config.exists("lights")) {
