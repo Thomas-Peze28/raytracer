@@ -23,6 +23,8 @@ namespace Raytracer
 
                 float length() const;
                 float dot(const Vector3D &other) const;
+                Vector3D cross(const Vector3D &other) const;
+                Vector3D normalized() const;
 
                 double _x;
                 double _y;
