@@ -132,3 +132,30 @@ unsigned int Raytracer::Object::Camera::fov() const
 {
     return _fov;
 }
+
+/**
+* @brief Get the position of the camera
+* @return The position of the camera
+**/
+Raytracer::Math::Point3D Raytracer::Object::Camera::lookFrom() const
+{
+    return _lookFrom;
+}
+
+/**
+* @brief Get the point the camera is looking at
+* @return The point the camera is looking at
+**/
+Raytracer::Math::Point3D Raytracer::Object::Camera::lookAt() const
+{
+    return _lookAt;
+}
+
+/**
+* @brief Get the up vector of the camera
+* @return The up vector of the camera
+**/
+Raytracer::Math::Vector3D Raytracer::Object::Camera::up() const
+{
+    return _up;
+}

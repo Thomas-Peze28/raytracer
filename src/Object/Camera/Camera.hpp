@@ -32,6 +32,9 @@ namespace Raytracer
                 unsigned int width() const;
                 unsigned int height() const;
                 unsigned int fov() const;
+                Math::Point3D lookFrom() const;
+                Math::Point3D lookAt() const;
+                Math::Vector3D up() const;
 
             private:
                 Raytracer::Math::Point3D _origin;
@@ -39,6 +42,10 @@ namespace Raytracer
                 unsigned int _width;
                 unsigned int _height;
                 unsigned int _fov;
+
+                Math::Point3D _lookFrom;
+                Math::Point3D _lookAt;
+                Math::Vector3D _up;
         };
     }
 }
