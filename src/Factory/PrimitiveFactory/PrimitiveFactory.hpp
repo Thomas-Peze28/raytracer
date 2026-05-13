@@ -14,6 +14,7 @@
 #include "Cone.hpp"
 
 #include "Translation.hpp"
+#include "Rotation.hpp"
 
 namespace Raytracer {
     class PrimitiveFactory {

@@ -98,3 +98,12 @@ Raytracer::HitResult Raytracer::Object::Sphere::hit(const Ray &ray) const
     }
     return result;
 }
+
+/**
+* @brief Get the pivot point of the sphere
+* @return The pivot point of the sphere
+**/
+Raytracer::Math::Vector3D Raytracer::Object::Sphere::pivot() const
+{
+    return Raytracer::Math::Vector3D(_center._x, _center._y, _center._z);
+}

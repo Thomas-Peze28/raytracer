@@ -75,6 +75,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         Math::Vector3D offset(tx, ty, tz);
         sphere = std::make_unique<Object::Translation>(std::move(sphere), offset);
     }
+
+    if (settings.exists("rotation")) {
+        const libconfig::Setting &r = settings.lookup("rotation");
+        double angleX = r.lookup("x");
+        double angleY = r.lookup("y");
+        double angleZ = r.lookup("z");
+        Math::Vector3D angles(angleX, angleY, angleZ);
+        sphere = std::make_unique<Object::Rotation>(std::move(sphere), angles);
+    }
     
     return sphere;
 }
@@ -111,6 +120,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         double tz = t.lookup("z");
         Math::Vector3D offset(tx, ty, tz);
         plane = std::make_unique<Object::Translation>(std::move(plane), offset);
+    }
+
+    if (settings.exists("rotation")) {
+        const libconfig::Setting &r = settings.lookup("rotation");
+        double angleX = r.lookup("x");
+        double angleY = r.lookup("y");
+        double angleZ = r.lookup("z");
+        Math::Vector3D angles(angleX, angleY, angleZ);
+        plane = std::make_unique<Object::Rotation>(std::move(plane), angles);
     }
 
     return plane;
@@ -155,6 +173,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cylinder = std::make_unique<Object::Translation>(std::move(cylinder), offset);
     }
 
+    if (settings.exists("rotation")) {
+        const libconfig::Setting &r = settings.lookup("rotation");
+        double angleX = r.lookup("x");
+        double angleY = r.lookup("y");
+        double angleZ = r.lookup("z");
+        Math::Vector3D angles(angleX, angleY, angleZ);
+        cylinder = std::make_unique<Object::Rotation>(std::move(cylinder), angles);
+    }
+
     return cylinder;
 }
 
@@ -195,6 +222,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         double tz = t.lookup("z");
         Math::Vector3D offset(tx, ty, tz);
         cone = std::make_unique<Object::Translation>(std::move(cone), offset);
+    }
+
+    if (settings.exists("rotation")) {
+        const libconfig::Setting &r = settings.lookup("rotation");
+        double angleX = r.lookup("x");
+        double angleY = r.lookup("y");
+        double angleZ = r.lookup("z");
+        Math::Vector3D angles(angleX, angleY, angleZ);
+        cone = std::make_unique<Object::Rotation>(std::move(cone), angles);
     }
 
     return cone;
