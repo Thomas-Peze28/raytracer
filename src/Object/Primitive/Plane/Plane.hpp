@@ -33,6 +33,7 @@ namespace Raytracer
                 Math::Vector3D _color;
 
                 HitResult hit(const Ray &ray) const override;
+                Math::Vector3D pivot() const override;
         };
     };
 };

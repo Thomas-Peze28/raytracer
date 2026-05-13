@@ -22,6 +22,7 @@ namespace Raytracer {
                 ~Translation() = default;
 
                 HitResult hit(const Ray &ray) const override;
+                Math::Vector3D pivot() const override;
                 
             private:
                 std::unique_ptr<IPrimitive> _object;

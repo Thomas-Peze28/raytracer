@@ -113,3 +113,12 @@ Raytracer::HitResult Raytracer::Object::Cylinder::hit(const Ray &ray) const
     result.color = _color;
     return result;
 }
+
+/**
+* @brief Get the pivot point of the cylinder
+* @return The pivot point of the cylinder
+**/
+Raytracer::Math::Vector3D Raytracer::Object::Cylinder::pivot() const
+{
+    return Raytracer::Math::Vector3D(_center._x, _center._y, _center._z);
+}

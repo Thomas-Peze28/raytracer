@@ -81,3 +81,19 @@ Raytracer::HitResult Raytracer::Object::Plane::hit(const Ray &ray) const
     }
     return result;
 }
+
+/**
+* @brief Get the pivot point of the plane
+* @return The pivot point of the plane
+**/
+Raytracer::Math::Vector3D Raytracer::Object::Plane::pivot() const
+{
+    if (_axis == 'x') {
+        return Math::Vector3D(_position, 0.0f, 0.0f);
+    } else if (_axis == 'y') {
+        return Math::Vector3D(0.0f, _position, 0.0f);
+    } else if (_axis == 'z') {
+        return Math::Vector3D(0.0f, 0.0f, _position);
+    }
+    return Math::Vector3D(0.0f, 0.0f, 0.0f); 
+}

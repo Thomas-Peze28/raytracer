@@ -127,3 +127,12 @@ Raytracer::HitResult Raytracer::Object::Cone::hit(const Ray &ray) const
     result.color = _color;
     return result;
 }
+
+/**
+* @brief Get the pivot point of the cone
+* @return The pivot point of the cone
+**/
+Raytracer::Math::Vector3D Raytracer::Object::Cone::pivot() const
+{
+    return Raytracer::Math::Vector3D(_center._x, _center._y, _center._z);
+}

@@ -26,3 +26,12 @@ Raytracer::HitResult Raytracer::Object::Translation::hit(const Ray &ray) const
 
     return result;
 }
+
+/**
+* @brief Get the pivot point of the translated object
+* @return The pivot point of the translated object
+**/
+Raytracer::Math::Vector3D Raytracer::Object::Translation::pivot() const
+{
+    return _object->pivot() + _offset;
+}

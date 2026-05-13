@@ -31,6 +31,7 @@ namespace Raytracer
                 virtual ~IPrimitive() = default;
 
                 virtual HitResult hit(const Ray &ray) const = 0;
+                virtual Math::Vector3D pivot() const = 0;
         };
     }
 }
