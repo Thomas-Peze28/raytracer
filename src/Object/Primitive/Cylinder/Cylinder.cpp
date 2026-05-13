@@ -13,7 +13,7 @@
  * @param radius The radius of the cylinder
  * @param height The height of the cylinder
  * @return A new Cylinder object with red default color
-*/
+**/
 Raytracer::Object::Cylinder::Cylinder(const Math::Point3D &center, double radius, double height) : _center(center), _radius(radius), _height(height), _color(255, 0, 0)
 {
 }
@@ -25,7 +25,7 @@ Raytracer::Object::Cylinder::Cylinder(const Math::Point3D &center, double radius
  * @param height The height of the cylinder
  * @param color The color of the cylinder
  * @return A new Cylinder object with the specified color
-*/
+**/
 Raytracer::Object::Cylinder::Cylinder(const Math::Point3D &center, double radius, double height, const Math::Vector3D &color) : _center(center), _radius(radius), _height(height), _color(color)
 {
 }
@@ -34,7 +34,7 @@ Raytracer::Object::Cylinder::Cylinder(const Math::Point3D &center, double radius
  * @brief Construct a new Cylinder object by copying another Cylinder object
  * @param other The other cylinder to copy
  * @return A new Cylinder object that is a copy of the other cylinder
-*/
+**/
 Raytracer::Object::Cylinder::Cylinder(const Cylinder &other) : _center(other._center), _radius(other._radius), _height(other._height), _color(other._color)
 {
 }

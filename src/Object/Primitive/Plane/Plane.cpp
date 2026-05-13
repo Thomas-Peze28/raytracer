@@ -13,7 +13,7 @@
  * @param position The position of the plane
  * @param color The color of the plane
  * @return A new Plane object with the specified color
-*/
+**/
 Raytracer::Object::Plane::Plane(const char axis, float position, const Math::Vector3D &color) : _axis(axis), _position(position), _color(color)
 {
     if (_axis == 'x') {
@@ -31,7 +31,7 @@ Raytracer::Object::Plane::Plane(const char axis, float position, const Math::Vec
  * @brief Construct a new Plane object by copying another Plane object
  * @param other The other plane
  * @return A new Plane object
-*/
+**/
 Raytracer::Object::Plane::Plane(const Plane &other) : _axis(other._axis), _normal(other._normal), _position(other._position), _color(other._color)
 {
 }

@@ -30,6 +30,10 @@ bool Raytracer::Core::displayHelp(int argc, char *argv[])
     return false;
 }
 
+/**
+* Writes the color to the output file.
+* @param color The color to write.
+**/
 void Raytracer::Core::write_color(Raytracer::Math::Vector3D color)
 {
     int r = color._x;
@@ -52,6 +56,10 @@ void Raytracer::Core::write_color(Raytracer::Math::Vector3D color)
     _output_file << r << " " << g << " " << b << "\n";
 }
 
+/**
+* Opens the output file for writing.
+* @return True if the file was opened successfully, false otherwise.
+**/
 bool Raytracer::Core::openOutputFile()
 {
     _output_file.open(_output_file_name);

@@ -7,6 +7,9 @@
 
 #include "Camera.hpp"
 
+/**
+* @brief Construct a new Camera object with default parameters
+**/
 Raytracer::Object::Camera::Camera()
 {
     _origin = Math::Point3D(0.0f, 0.0f, 0.0f);
@@ -26,7 +29,7 @@ Raytracer::Object::Camera::Camera()
 * @param width The width of the camera's view plane
 * @param height The height of the camera's view plane
 * @return A new Camera object
-*/
+**/
 Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height) {
     _width = width;
     _height = height;
@@ -57,6 +60,13 @@ Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height) {
     );
 }
 
+/** 
+* @brief Construct a new Camera object
+* @param width The width of the camera's view plane
+* @param height The height of the camera's view plane
+* @param fov The field of view of the camera
+* @return A new Camera object
+**/
 Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height, unsigned int fov) {
     _width = width;
     _height = height;
@@ -117,7 +127,7 @@ Raytracer::Object::Camera::Camera(unsigned int width, unsigned int height, unsig
  * @brief Construct a new Camera object by copying another Camera object
  * @param other The other camera
  * @return A new Camera object
-*/
+**/
 Raytracer::Object::Camera::Camera(const Camera &other) :
     _origin(other._origin),
     _screen(other._screen),
@@ -135,7 +145,7 @@ Raytracer::Object::Camera::Camera(const Camera &other) :
  * @param u The parameter along the bottom side of the screen
  * @param v The parameter along the left side of the screen
  * @return A ray from the camera through the point on the screen corresponding to the parameters u and v
-*/
+**/
 Raytracer::Object::Ray Raytracer::Object::Camera::ray(double u, double v) const
 {
     return Raytracer::Object::Ray(_origin, _screen.pointAt(u, v) - _origin);
@@ -145,7 +155,7 @@ Raytracer::Object::Ray Raytracer::Object::Camera::ray(double u, double v) const
  * @brief Assign the values of another Camera object to this Camera object
  * @param other The other camera
  * @return A reference to this Camera object
-*/
+**/
 Raytracer::Object::Camera& Raytracer::Object::Camera::operator=(const Camera &other)
 {
     if (this != &other) {

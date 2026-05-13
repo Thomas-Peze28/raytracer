@@ -7,6 +7,12 @@
 
 #include "Core.hpp"
 
+/** 
+* @brief Display usage information for the raytracer
+* @param argc The number of command line arguments
+* @param argv The command line arguments
+* @return 0 if help is displayed, 1 if usage is correct, 84 otherwise
+**/
 int usage(int argc, char *argv[])
 {
     if (argc != 2 && argc != 4) {
@@ -32,10 +38,10 @@ int usage(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-    int rc = usage(argc, argv);
-    if (rc != 1)
-        return rc;
+    int return_val = usage(argc, argv);
 
+    if (return_val != 1)
+        return return_val;
     try {
         Raytracer::Scene scene;
         Raytracer::Parser parser;

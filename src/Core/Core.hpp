@@ -58,6 +58,8 @@ namespace Raytracer
             static void signalHandler(int signal);
             static bool _signal;
 
+            int usage(int argc, char *argv[]);
+
         private:
             std::string _output_file_name;
             std::ofstream _output_file;
