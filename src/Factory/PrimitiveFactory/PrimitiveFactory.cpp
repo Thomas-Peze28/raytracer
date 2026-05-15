@@ -85,6 +85,22 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         sphere = std::make_unique<Object::Rotation>(std::move(sphere), angles);
     }
 
+    /**
+     * @brief Optional scaling block for primitives
+     *
+     * If present in the configuration, `scale` must provide three
+     * components: `x`, `y` and `z`. Each is a floating point factor that
+     * scales the primitive along the corresponding axis. The factory wraps
+     * the previously created primitive in a `Scale` decorator which will
+     * perform the necessary ray-space transformations at render time.
+     *
+     * Example in .rtx/.rtc format:
+     * scale: { x = 1.5; y = 1.0; z = 0.75; };
+     *
+     * The design intentionally applies transforms in the order: translation,
+     * rotation, scale (matching the decorator stacking order). This order
+     * preserves intuitive semantics for position then orientation then size.
+     */
     if (settings.exists("scale")) {
         const libconfig::Setting &s = settings.lookup("scale");
         double scaleX = s.lookup("x");
@@ -140,6 +156,14 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         plane = std::make_unique<Object::Rotation>(std::move(plane), angles);
     }
 
+    /**
+     * @brief Optional `scale` block for planes.
+     *
+     * Planes can also be decorated with a `scale`; while an infinite plane
+     * scaled along one axis behaves non-intuitively, allowing scale here
+     * keeps the API consistent and enables advanced effects when combined
+     * with other decorators.
+     */
     if (settings.exists("scale")) {
         const libconfig::Setting &s = settings.lookup("scale");
         double scaleX = s.lookup("x");
@@ -200,6 +224,14 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cylinder = std::make_unique<Object::Rotation>(std::move(cylinder), angles);
     }
 
+    /**
+     * @brief Optional `scale` block for cylinders.
+     *
+     * For finite cylinders scaling affects radius and height directions
+     * differently depending on axis factors. The decorator applies
+     * non-uniform scaling at render-time and the underlying cylinder's
+     * intersection math is evaluated in the scaled local space.
+     */
     if (settings.exists("scale")) {
         const libconfig::Setting &s = settings.lookup("scale");
         double scaleX = s.lookup("x");
@@ -260,6 +292,14 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cone = std::make_unique<Object::Rotation>(std::move(cone), angles);
     }
 
+    /**
+     * @brief Optional `scale` block for cones.
+     *
+     * Cone geometry uses an angle parameter internally; scaling is applied by
+     * remapping the ray into the appropriately scaled space so the cone's
+     * quadratic intersection is evaluated correctly. This decorator keeps
+     * the cone implementation untouched while enabling intuitive resizing.
+     */
     if (settings.exists("scale")) {
         const libconfig::Setting &s = settings.lookup("scale");
         double scaleX = s.lookup("x");
