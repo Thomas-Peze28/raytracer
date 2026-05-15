@@ -328,6 +328,8 @@ primitives: (
 
 Each primitive supports transformations:
 
+Applied in this order by the factory: translation, rotation, then scale.
+
 ```conf
 primitives: (
     {
@@ -348,6 +350,13 @@ primitives: (
             y: 45.0;
             z: 0.0;
         };
+
+        // Scale
+        scale: {
+            x: 1.0;
+            y: 2.0;
+            z: 1.0;
+        };
         
         color: { r: 1.0; g: 0.0; b: 0.0; };
         material: { type: "flat"; };
@@ -361,12 +370,13 @@ primitives: (
 
 ### Common to All Primitives
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type | Description | Default |
+|-----------|------|-------------|---------|
 | `type` | String | Primitive type |
 | `position.x/y/z` | Float | Center position |
 | `color.r/g/b` | Float | RGB color (0.0-1.0) |
 | `material.type` | String | Material type |
+| `scale.x/y/z` | Float | Scale factors per axis | 1.0 |
 
 ### Shape-Specific
 

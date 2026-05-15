@@ -84,6 +84,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         Math::Vector3D angles(angleX, angleY, angleZ);
         sphere = std::make_unique<Object::Rotation>(std::move(sphere), angles);
     }
+
+    if (settings.exists("scale")) {
+        const libconfig::Setting &s = settings.lookup("scale");
+        double scaleX = s.lookup("x");
+        double scaleY = s.lookup("y");
+        double scaleZ = s.lookup("z");
+        Math::Vector3D factors(scaleX, scaleY, scaleZ);
+        sphere = std::make_unique<Object::Scale>(std::move(sphere), factors);
+    }
     
     return sphere;
 }
@@ -129,6 +138,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         double angleZ = r.lookup("z");
         Math::Vector3D angles(angleX, angleY, angleZ);
         plane = std::make_unique<Object::Rotation>(std::move(plane), angles);
+    }
+
+    if (settings.exists("scale")) {
+        const libconfig::Setting &s = settings.lookup("scale");
+        double scaleX = s.lookup("x");
+        double scaleY = s.lookup("y");
+        double scaleZ = s.lookup("z");
+        Math::Vector3D factors(scaleX, scaleY, scaleZ);
+        plane = std::make_unique<Object::Scale>(std::move(plane), factors);
     }
 
     return plane;
@@ -182,6 +200,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         cylinder = std::make_unique<Object::Rotation>(std::move(cylinder), angles);
     }
 
+    if (settings.exists("scale")) {
+        const libconfig::Setting &s = settings.lookup("scale");
+        double scaleX = s.lookup("x");
+        double scaleY = s.lookup("y");
+        double scaleZ = s.lookup("z");
+        Math::Vector3D factors(scaleX, scaleY, scaleZ);
+        cylinder = std::make_unique<Object::Scale>(std::move(cylinder), factors);
+    }
+
     return cylinder;
 }
 
@@ -231,6 +258,15 @@ std::unique_ptr<Raytracer::Object::IPrimitive> Raytracer::PrimitiveFactory::crea
         double angleZ = r.lookup("z");
         Math::Vector3D angles(angleX, angleY, angleZ);
         cone = std::make_unique<Object::Rotation>(std::move(cone), angles);
+    }
+
+    if (settings.exists("scale")) {
+        const libconfig::Setting &s = settings.lookup("scale");
+        double scaleX = s.lookup("x");
+        double scaleY = s.lookup("y");
+        double scaleZ = s.lookup("z");
+        Math::Vector3D factors(scaleX, scaleY, scaleZ);
+        cone = std::make_unique<Object::Scale>(std::move(cone), factors);
     }
 
     return cone;

@@ -15,6 +15,7 @@
 
 #include "Translation.hpp"
 #include "Rotation.hpp"
+#include "Scale.hpp"
 
 namespace Raytracer {
     class PrimitiveFactory {

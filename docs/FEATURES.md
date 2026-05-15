@@ -16,6 +16,7 @@ These features are required for the project to meet core specifications.
 
 ### ✅ Transformations
 - [x] **Translation** - Move objects in 3D space
+- [x] **Scale** - Resize objects along axes
 
 ### ✅ Lighting
 - [x] **Directional Light** - Parallel light rays (like sunlight)
@@ -48,7 +49,6 @@ Once core features are working, these enhance the raytracer.
 
 ### 🔄 Transformations
 - [x] **Rotation** - Rotate objects around axes
-- [ ] **Scale** - Resize objects (0.5 pts)
 - [ ] **Shear** - Skew transformations (0.5 pts)
 
 ### 🔄 Lighting
@@ -78,7 +78,7 @@ Advanced features for enhanced realism and performance.
 ### 🔀 Advanced Transformations
 | Feature | Points | Status |
 |---------|--------|--------|
-| Scale | 0.5 | ❌ Not Started |
+| Scale | 0.5 | ✅ Implemented |
 | Shear | 0.5 | ❌ Not Started |
 | Transformation Matrix | 2 | ❌ Not Started |
 | Scene Graph | 2 | ❌ Not Started |
